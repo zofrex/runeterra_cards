@@ -11,5 +11,11 @@ describe RuneterraCards do
         _{RuneterraCards::from_deck_code("ahsdkjahdjahds")}.must_raise RuneterraCards::Base32Error
       end
     end
+
+    describe "empty input" do
+      it "returns an EmptyInputError" do
+        _{RuneterraCards::from_deck_code("")}.must_raise RuneterraCards::EmptyInputError
+      end
+    end
   end
 end
