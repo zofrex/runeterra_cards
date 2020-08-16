@@ -12,4 +12,10 @@ module RuneterraCards
       super("The input was an empty string")
     end
   end
+
+  class UnrecognizedVersionError < DeckCodeParseError
+    def initialize(expected, got)
+      super("Unrecognized deck code version number: #{got}, was expecting: #{expected}. Possibly an invalid deck code, possibly you need to update the deck code library version.")
+    end
+  end
 end

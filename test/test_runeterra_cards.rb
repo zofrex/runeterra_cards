@@ -17,5 +17,14 @@ describe RuneterraCards do
         _{RuneterraCards::from_deck_code("")}.must_raise RuneterraCards::EmptyInputError
       end
     end
+
+    describe "invalid version input" do
+      it "returns an UnrecognizedVersionError" do
+        format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
+        bytes = [format_and_version].pack("C")
+        code = Base32::encode(bytes)
+        _{RuneterraCards::from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
+      end
+    end
   end
 end
