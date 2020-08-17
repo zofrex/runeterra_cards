@@ -1,5 +1,6 @@
 require 'runeterra_cards/version'
 require 'runeterra_cards/errors'
+require 'runeterra_cards/factions'
 
 require 'base32'
 
