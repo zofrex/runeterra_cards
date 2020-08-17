@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest', '~> 5.14'
   s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'minitest-reporters', '~> 1.4.2'
+  s.add_development_dependency 'warning', '~> 1.1.0'
 end
