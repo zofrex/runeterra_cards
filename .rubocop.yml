@@ -1,0 +1,26 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.5
+
+# I like parallel assignment.
+Style/ParallelAssignment:
+  Enabled: false
+
+# imho
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+# Don't enforce block brace spaces in tests
+# because _{foo} is common there and matches _(foo), _ { foo } looks weird because it doesn't match _(foo)
+Layout/SpaceInsideBlockBraces:
+  Exclude:
+    - 'test/**'
+Layout/SpaceBeforeBlockBraces:
+  Exclude:
+    - 'test/**'
+
+# Not a relevant metric for tests, where we organise tests by block and those blocks get pretty large
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**'
