@@ -1,5 +1,6 @@
 module RuneterraCards
-  class DeckCodeParseError < StandardError; end
+  class DeckCodeParseError < StandardError
+  end
 
   class Base32Error < DeckCodeParseError
     def initialize
@@ -16,6 +17,19 @@ module RuneterraCards
   class UnrecognizedVersionError < DeckCodeParseError
     def initialize(expected, got)
       super("Unrecognized deck code version number: #{got}, was expecting: #{expected}. Possibly an invalid deck code, possibly you need to update the deck code library version.")
+    end
+  end
+
+  class MissingCardDataError < StandardError
+    attr_reader :missing_key, :card
+
+    def initialize(missing_key, card=nil)
+      unless card.nil?
+        super("Card #{card} was missing required key #{missing_key}")
+      else
+        super("Card data was missing required key #{missing_key}")
+      end
+      @missing_key, @card = missing_key, card
     end
   end
 end

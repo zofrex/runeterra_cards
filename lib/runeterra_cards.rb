@@ -2,6 +2,7 @@ require 'runeterra_cards/version'
 require 'runeterra_cards/errors'
 require 'runeterra_cards/factions'
 require 'runeterra_cards/card_and_count'
+require 'runeterra_cards/card_metadata'
 
 require 'base32'
 
