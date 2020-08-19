@@ -1,6 +1,7 @@
 require:
   - rubocop-minitest
   - rubocop-packaging
+  - rubocop-performance
 
 inherit_from:
   - .rubocop_pending.yml
