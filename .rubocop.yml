@@ -1,6 +1,8 @@
 require: rubocop-minitest
 
-inherit_from: .rubocop_todo.yml
+inherit_from:
+  - .rubocop_todo.yml
+  - .rubocop_pending.yml
 
 AllCops:
   TargetRubyVersion: 2.5
