@@ -1,9 +1,20 @@
 # frozen_string_literal: true
 
 module RuneterraCards
+  # Represents a card and how many of that card are in a collection.
   class CardAndCount
-    attr_reader :code, :count
+    # The card code, for example "01DE123"
+    # @return [String]
+    attr_reader :code
 
+    # How many of this card are in a collection (between 1-3).
+    # @return [Fixnum]
+    attr_reader :count
+
+    # @param set_number [Fixnum]
+    # @param faction_number [Fixnum]
+    # @param card_number [Fixnum]
+    # @param count [Fixnum]
     def initialize(set_number, faction_number, card_number, count)
       padded_set = format('%<i>02d', i: set_number)
       faction = RuneterraCards::FACTION_IDENTIFIERS_FROM_INT[faction_number]

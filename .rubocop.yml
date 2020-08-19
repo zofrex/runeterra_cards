@@ -3,7 +3,6 @@ require:
   - rubocop-packaging
 
 inherit_from:
-  - .rubocop_todo.yml
   - .rubocop_pending.yml
 
 AllCops:

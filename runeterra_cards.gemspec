@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-minitest', '~> 0.10.1'
   s.add_development_dependency 'rubocop-packaging', '~> 0.3.0'
   s.add_development_dependency 'warning', '~> 1.1.0'
+  s.add_development_dependency 'yard', '~> 0.9.25'
 end
