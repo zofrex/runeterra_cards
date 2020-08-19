@@ -1,3 +1,5 @@
+require: rubocop-minitest
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:
