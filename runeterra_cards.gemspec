@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.executables   = []
   s.require_paths = ['lib']
-  s.files         = `git ls-files lib LICENSE.txt`.split("\n")
+  s.files         = Dir['lib/**/*', 'LICENSE.txt']
 
   s.add_dependency 'base32', '~> 0.3.2'
   s.add_development_dependency 'bundler', '~> 2.0'
@@ -25,5 +25,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'rubocop', '~> 0.89.1'
   s.add_development_dependency 'rubocop-minitest', '~> 0.10.1'
+  s.add_development_dependency 'rubocop-packaging', '~> 0.3.0'
   s.add_development_dependency 'warning', '~> 1.1.0'
 end
