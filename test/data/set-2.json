@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Subpurrsible",
+    "cardCode": "02PZ001",
+    "rarityRef": "Epic",
+    "collectible": true
+  },
+  {
+    "name": "Shellshocker ",
+    "cardCode": "02BW040",
+    "rarityRef": "Common",
+    "collectible": true
+  },
+  {
+    "name": "Gangplank's Parrrley",
+    "cardCode": "02BW032T2",
+    "rarityRef": "None",
+    "collectible": false
+  },
+  {
+    "name": "Powder Monkey",
+    "cardCode": "02BW034T1",
+    "rarityRef": "None",
+    "collectible": false
+  }
+]

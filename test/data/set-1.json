@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Discipline of Fortitude",
+    "cardCode": "01IO012T2",
+    "rarityRef": "None",
+    "collectible": false
+  },
+  {
+    "name": "Draven",
+    "cardCode": "01NX020T3",
+    "rarityRef": "None",
+    "collectible": false
+  },
+  {
+    "name": "Dawnspeakers",
+    "cardCode": "01DE031",
+    "rarityRef": "Epic",
+    "collectible": true
+  },
+  {
+    "name": "Lucian",
+    "cardCode": "01DE022",
+    "rarityRef": "Champion",
+    "collectible": true
+  }
+]
