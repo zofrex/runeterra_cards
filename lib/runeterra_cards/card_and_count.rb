@@ -22,5 +22,14 @@ module RuneterraCards
       @code = "#{padded_set}#{faction}#{padded_card_number}"
       @count = count
     end
+
+    def eql?(other)
+      @code == other.code &&
+        @count == other.count
+    end
+
+    def hash
+      [@code, @count].hash
+    end
   end
 end

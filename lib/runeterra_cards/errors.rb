@@ -50,7 +50,7 @@ Possibly an invalid deck code, possibly you need to update the deck code library
     # @return [nil] if neither name nor card code were present
     attr_reader :card
 
-    def initialize(missing_key, card=nil)
+    def initialize(missing_key, card)
       if card.nil?
         super("Card data was missing required key #{missing_key}")
       else

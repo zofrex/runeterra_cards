@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name    = 'runeterra_cards'
   s.version = RuneterraCards::VERSION
 
-  s.required_ruby_version = '>= 2.5'
+  s.required_ruby_version = '>= 2.6'
 
   s.authors = ['zofrex']
   s.email = ['zofrex@gmail.com']
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'base32', '~> 0.3.2'
   s.add_development_dependency 'bundler', '~> 2.0'
+  s.add_development_dependency 'deep-cover', '~> 0.7'
   s.add_development_dependency 'minitest', '~> 5.14'
   s.add_development_dependency 'minitest-reporters', '~> 1.4.2'
   s.add_development_dependency 'rake', '~> 13.0.1'

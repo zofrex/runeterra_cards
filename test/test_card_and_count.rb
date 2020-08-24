@@ -27,4 +27,24 @@ describe RuneterraCards::CardAndCount do
     card = RuneterraCards::CardAndCount.new(1, 0, 2, 3)
     _(card.count).must_equal(3)
   end
+
+  describe '#eql?' do
+    it 'returns true if code AND count are the same' do
+      card1 = RuneterraCards::CardAndCount.new(1, 0, 2, 3)
+      card2 = RuneterraCards::CardAndCount.new(1, 0, 2, 3)
+      _(card1.eql?(card2)).must_equal true
+    end
+
+    it 'returns false if code differs and count is the same' do
+      card1 = RuneterraCards::CardAndCount.new(1, 0, 2, 3)
+      card2 = RuneterraCards::CardAndCount.new(1, 0, 3, 3)
+      _(card1.eql?(card2)).must_equal false
+    end
+
+    it 'returns false if code is the same and count differs' do
+      card1 = RuneterraCards::CardAndCount.new(1, 0, 2, 3)
+      card2 = RuneterraCards::CardAndCount.new(1, 0, 2, 2)
+      _(card1.eql?(card2)).must_equal false
+    end
+  end
 end

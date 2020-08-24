@@ -7,7 +7,7 @@ inherit_from:
   - .rubocop_pending.yml
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
 
 # I like parallel assignment.
 Style/ParallelAssignment:
@@ -30,3 +30,7 @@ Layout/SpaceBeforeBlockBraces:
 Metrics/BlockLength:
   Exclude:
     - 'test/**'
+
+# Just no.
+Style/AsciiComments:
+  Enabled: false
