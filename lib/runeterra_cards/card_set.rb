@@ -67,7 +67,7 @@ module RuneterraCards
           number_of_cards, set, faction = array.shift(3)
 
           array.shift(number_of_cards).map do |card_number|
-            CardAndCount.new(set, faction, card_number, number_of_copies)
+            CardAndCount.new(set: set, faction_number: faction, card_number: card_number, count: number_of_copies)
           end
         end
       end

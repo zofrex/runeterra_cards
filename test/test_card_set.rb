@@ -10,14 +10,14 @@ describe RuneterraCards::CardSet do
     end
 
     it 'can contain a card' do
-      card = RuneterraCards::CardAndCount.new(1, 0, 0, 2)
+      card = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
       card_set = RuneterraCards::CardSet.new([card])
       _(card_set.cards).must_include(card)
     end
 
     it 'can contain multiple cards' do
-      card1 = RuneterraCards::CardAndCount.new(1, 0, 0, 2)
-      card2 = RuneterraCards::CardAndCount.new(1, 1, 7, 3)
+      card1 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
+      card2 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 1, card_number: 7, count: 3)
       card_set = RuneterraCards::CardSet.new([card1, card2])
       _(card_set.cards).must_equal(Set[card1, card2])
     end
@@ -108,7 +108,7 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(1, 3, 17, 3)]
+        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 3)]
         _(card_set.cards).must_equal expected
       end
 
@@ -126,7 +126,7 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(1, 3, 17, 2)]
+        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 2)]
         _(card_set.cards).must_equal expected
       end
 
@@ -144,7 +144,7 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(1, 3, 17, 1)]
+        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1)]
         _(card_set.cards).must_equal expected
       end
 
@@ -231,8 +231,8 @@ describe RuneterraCards::CardSet do
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
         expected = Set[
-          RuneterraCards::CardAndCount.new(1, 3, 17, 1),
-          RuneterraCards::CardAndCount.new(1, 4, 16, 1),
+          RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1),
+          RuneterraCards::CardAndCount.new(set: 1, faction_number: 4, card_number: 16, count: 1),
         ]
         _(card_set.cards).must_equal expected
       end
@@ -253,8 +253,8 @@ describe RuneterraCards::CardSet do
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
         expected = Set[
-            RuneterraCards::CardAndCount.new(1, 3, 17, 1),
-            RuneterraCards::CardAndCount.new(1, 3, 18, 1),
+            RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1),
+            RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 18, count: 1),
         ]
         _(card_set.cards).must_equal expected
       end
