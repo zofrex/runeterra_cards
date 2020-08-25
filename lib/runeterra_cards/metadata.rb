@@ -39,8 +39,9 @@ module RuneterraCards
     # Fetch card metadata for a card via its card code
     # @param card_code [String] card code, e.g. 01DE031
     # @return [CardMetadata]
+    # @todo document errors if card_code doesn't exist
     def lookup_card(card_code)
-      @cards[card_code]
+      @cards.fetch(card_code)
     end
 
     # Returns all cards in the metadata set that are collectible

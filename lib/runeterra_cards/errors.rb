@@ -9,8 +9,8 @@ module RuneterraCards
   # got malformed somehow.
   class Base32Error < DeckCodeParseError
     def initialize
-      super('Encountered an error while Base32 decoding deck code. \
-Probably an invalid deck code, or possibly a bug in the Base32 handling.')
+      super('Encountered an error while Base32 decoding deck code.' \
+        ' Probably an invalid deck code, or possibly a bug in the Base32 handling.')
     end
   end
 
@@ -52,7 +52,7 @@ Possibly an invalid deck code, possibly you need to update the deck code library
 
     def initialize(missing_key, card)
       if card.nil?
-        super("Card data was missing required key #{missing_key}")
+        super("Unknown card (no code or name) was missing required key #{missing_key}")
       else
         super("Card #{card} was missing required key #{missing_key}")
       end

@@ -3,6 +3,8 @@
 require_relative 'test_helper'
 
 describe RuneterraCards::CardSet do
+  cover 'RuneterraCards::CardSet'
+
   describe 'creation and retrieval' do
     it 'can be empty' do
       card_set = RuneterraCards::CardSet.new([])
@@ -31,35 +33,47 @@ describe RuneterraCards::CardSet do
         it 'returns a Base32Error' do
           _{RuneterraCards::CardSet.from_deck_code('ahsdkjahdjahds')}.must_raise RuneterraCards::Base32Error
         end
+
+        it 'has a useful message in the error' do
+          err = _{RuneterraCards::CardSet.from_deck_code('ahsdkjahdjahds')}.must_raise RuneterraCards::Base32Error
+          _(err.message).must_match(/error while Base32 decoding.*invalid deck code.*bug in the Base32 handling/)
+        end
       end
 
       describe 'empty input' do
         it 'returns an EmptyInputError' do
           _{RuneterraCards::CardSet.from_deck_code('')}.must_raise RuneterraCards::EmptyInputError
         end
+
+        it 'returns an error with a helpful message' do
+          err = _{RuneterraCards::CardSet.from_deck_code('')}.must_raise RuneterraCards::EmptyInputError
+          _(err.message).must_match(/empty string/)
+        end
       end
 
       describe 'invalid version' do
-        it 'returns an UnrecognizedVersionError' do
+        before do
           format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
           bytes = [format_and_version].pack('C') + EMPTY_DECK
-          code = Base32.encode(bytes)
-          _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
+          @code = Base32.encode(bytes)
+        end
+
+        it 'returns an UnrecognizedVersionError' do
+          _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
+        end
+
+        it 'has a helpful error message' do
+          err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
+          _(err.message).must_match(/^Unrecognized.*version.*invalid deck code.*update the deck code library/)
         end
 
         it 'includes the version we got in the error message' do
-          format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
-          bytes = [format_and_version].pack('C') + EMPTY_DECK
-          code = Base32.encode(bytes)
-          err = _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
+          err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
           _(err.message).must_match(/Unrecognized deck code version number: 3/)
         end
 
         it 'includes the expected version in the error message' do
-          format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
-          bytes = [format_and_version].pack('C') + EMPTY_DECK
-          code = Base32.encode(bytes)
-          err = _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
+          err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
           _(err.message).must_match(/was expecting: 2/)
         end
       end
@@ -72,6 +86,22 @@ describe RuneterraCards::CardSet do
           _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise StandardError
           # TODO: change this to a more specific error
         end
+      end
+    end
+
+    describe 'valid versions' do
+      it 'accepts version 1' do
+        format_and_version = (1 << 4) | (1 & 0xF) # format 1, version 1
+        bytes = [format_and_version].pack('C') + EMPTY_DECK
+        code = Base32.encode(bytes)
+        RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
+      end
+
+      it 'accepts version 2' do
+        format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
+        bytes = [format_and_version].pack('C') + EMPTY_DECK
+        code = Base32.encode(bytes)
+        RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
       end
     end
 

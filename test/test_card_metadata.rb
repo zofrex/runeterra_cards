@@ -3,6 +3,7 @@
 require_relative 'test_helper'
 
 describe RuneterraCards::CardMetadata do
+  cover 'RuneterraCards::CardMetadata'
   describe 'contains data' do
     before do
       @nautilus = { 'cardCode' => '01NX051', 'name' => 'Nautilus', 'collectible' => true }
@@ -43,7 +44,7 @@ describe RuneterraCards::CardMetadata do
 
       it 'has a helpful error message' do
         error = _{RuneterraCards::CardMetadata.new(@hash)}.must_raise(RuneterraCards::MissingCardDataError)
-        _(error.message).must_match(/.*01NX055.*missing.*key.*name/)
+        _(error.message).must_match(/Card 01NX055.*missing.*key.*name/)
       end
 
       it 'has the card code in the error' do
@@ -68,7 +69,7 @@ describe RuneterraCards::CardMetadata do
 
       it 'still has a helpful error message' do
         error = _{RuneterraCards::CardMetadata.new(@hash)}.must_raise(RuneterraCards::MissingCardDataError)
-        _(error.message).must_match(/.*missing.*key.*(name|cardCode)/)
+        _(error.message).must_match(/^Unknown card.*no code or name.*missing.*key.*(name|cardCode)/)
       end
 
       it 'still has a missing key in the error' do

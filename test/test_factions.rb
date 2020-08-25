@@ -3,6 +3,7 @@
 require_relative 'test_helper'
 
 describe RuneterraCards do
+  cover 'RuneterraCards'
   # Paste table from Github ( https://github.com/RiotGames/LoRDeckCodes ) here:
   FACTION_TABLE = <<-TABLE
   0	DE	Demacia

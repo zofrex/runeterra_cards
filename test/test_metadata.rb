@@ -3,6 +3,7 @@
 require_relative 'test_helper'
 
 describe RuneterraCards::Metadata do
+  cover 'RuneterraCards::Metadata'
   SET_1 = File.join(__dir__, './data/set-1.json').freeze
   SET_2 = File.join(__dir__, './data/set-2.json').freeze
 

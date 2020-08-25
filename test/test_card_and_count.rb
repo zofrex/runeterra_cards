@@ -3,6 +3,7 @@
 require_relative 'test_helper'
 
 describe RuneterraCards::CardAndCount do
+  cover 'RuneterraCards::CardAndCount'
   describe 'initialise from integers' do
     it 'pads the set' do
       card = RuneterraCards::CardAndCount.new(set: 2, faction_number: 1, card_number: 1, count: 1)
@@ -48,7 +49,7 @@ describe RuneterraCards::CardAndCount do
     end
 
     it 'errors if you set code and faction' do
-      _{RuneterraCards::CardAndCount.new(count: 1, code: 'foo', faction: 0)}.must_raise StandardError
+      _{RuneterraCards::CardAndCount.new(count: 1, code: 'foo', faction_number: 0)}.must_raise StandardError
     end
 
     it 'errors if you set code and card number' do
@@ -89,6 +90,31 @@ describe RuneterraCards::CardAndCount do
       card1 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 2, count: 3)
       card2 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 2, count: 2)
       _(card1.eql?(card2)).must_equal false
+    end
+  end
+
+  describe '#hash' do
+    it 'is the same for two identical objects' do
+      card1 = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      card2 = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      _(card1.hash).must_equal card2.hash
+    end
+
+    it 'is different for objects that differ only by count' do
+      card1 = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      card2 = RuneterraCards::CardAndCount.new(code: '01DE044', count: 2)
+      _(card1.hash).wont_equal card2.hash
+    end
+
+    it 'is different for objects that differ only by code' do
+      card1 = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      card2 = RuneterraCards::CardAndCount.new(code: '01DE043', count: 3)
+      _(card1.hash).wont_equal card2.hash
+    end
+
+    it 'allows CardAndCount to be placed in a Set' do
+      card = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      Set[card] # won't raise
     end
   end
 end

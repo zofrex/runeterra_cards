@@ -22,7 +22,7 @@ module RuneterraCards
         @code = code
       else
         padded_set = format('%<i>02d', i: set)
-        faction = RuneterraCards::FACTION_IDENTIFIERS_FROM_INT[faction_number]
+        faction = FACTION_IDENTIFIERS_FROM_INT.fetch(faction_number)
         padded_card_number = format('%<i>03d', i: card_number)
         @code = "#{padded_set}#{faction}#{padded_card_number}"
       end
@@ -30,12 +30,11 @@ module RuneterraCards
     end
 
     def eql?(other)
-      @code == other.code &&
-        @count == other.count
+      code.eql?(other.code) && count.equal?(other.count)
     end
 
     def hash
-      [@code, @count].hash
+      [code, count].hash
     end
   end
 end

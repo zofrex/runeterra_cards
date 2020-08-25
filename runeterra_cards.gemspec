@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'deep-cover', '~> 0.7'
   s.add_development_dependency 'minitest', '~> 5.14'
   s.add_development_dependency 'minitest-reporters', '~> 1.4.2'
+  s.add_development_dependency 'mutant-minitest'
   s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'rubocop', '~> 0.89.1'
   s.add_development_dependency 'rubocop-minitest', '~> 0.10.1'

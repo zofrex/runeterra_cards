@@ -31,4 +31,14 @@ task :add_pending_cops do
   puts "Added #{pending.length} cops to .rubocop_pending.yml"
 end
 
-task default: :test
+task :coverage do
+  sh 'bundle exec deep-cover clone rake test'
+end
+
+task :mutation_test do
+  sh "bundle exec mutant --include lib --require 'runeterra_cards' --use minitest -- 'RuneterraCards*'"
+end
+
+task all_checks: %i[test coverage mutation_test]
+
+task default: :all_checks
