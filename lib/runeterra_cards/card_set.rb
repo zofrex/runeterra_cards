@@ -26,7 +26,7 @@ module RuneterraCards
       binary_data = decode_base32(deck_code)
       format, version = decode_format_and_version(binary_data[0])
 
-      raise UnrecognizedVersionError.new(SUPPORTED_VERSION, version) unless version.equal? SUPPORTED_VERSION
+      raise UnrecognizedVersionError.new(SUPPORTED_VERSION, version) unless version <= SUPPORTED_VERSION
 
       raise unless format.equal? 1
 

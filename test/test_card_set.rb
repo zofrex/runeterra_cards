@@ -41,26 +41,26 @@ describe RuneterraCards::CardSet do
 
       describe 'invalid version' do
         it 'returns an UnrecognizedVersionError' do
-          format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
+          format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
           bytes = [format_and_version].pack('C') + EMPTY_DECK
           code = Base32.encode(bytes)
           _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
         end
 
         it 'includes the version we got in the error message' do
-          format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
+          format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
           bytes = [format_and_version].pack('C') + EMPTY_DECK
           code = Base32.encode(bytes)
           err = _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
-          _(err.message).must_match(/Unrecognized deck code version number: 2/)
+          _(err.message).must_match(/Unrecognized deck code version number: 3/)
         end
 
         it 'includes the expected version in the error message' do
-          format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
+          format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
           bytes = [format_and_version].pack('C') + EMPTY_DECK
           code = Base32.encode(bytes)
           err = _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::UnrecognizedVersionError
-          _(err.message).must_match(/was expecting: 1/)
+          _(err.message).must_match(/was expecting: 2/)
         end
       end
 

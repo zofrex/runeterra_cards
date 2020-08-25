@@ -10,5 +10,5 @@ require 'runeterra_cards/card_set'
 
 module RuneterraCards
   # The version of deck encoding supported
-  SUPPORTED_VERSION = 1
+  SUPPORTED_VERSION = 2
 end
