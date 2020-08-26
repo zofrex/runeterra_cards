@@ -50,5 +50,12 @@ module RuneterraCards
     def all_collectible
       @cards.select { |_, card| card.collectible? }
     end
+
+    # Returns a [CardSet] that represents a complete card collection.
+    # That is: 3x of every card that is collectible.
+    # @return [CardSet]
+    def full_set
+      CardSet.new(all_collectible.keys.each_with_object({}) { |code, result| result[code] = 3 })
+    end
   end
 end

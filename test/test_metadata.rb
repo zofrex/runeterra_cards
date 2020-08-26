@@ -51,4 +51,18 @@ describe RuneterraCards::Metadata do
       _(collectible.all? {|_, card| card.collectible?}).must_equal true
     end
   end
+
+  describe '#full_set' do
+    it 'returns a CardSet of all collectible cards' do
+      @m.add_set_file(SET_1)
+      @m.add_set_file(SET_2)
+      full_set = @m.full_set
+      _(full_set.cards).must_equal({
+                                     '01DE031' => 3,
+                                     '01DE022' => 3,
+                                     '02PZ001' => 3,
+                                     '02BW040' => 3,
+                                   })
+    end
+  end
 end

@@ -18,6 +18,6 @@ module RuneterraCards
     'NX' => 3,
     'PZ' => 4,
     'SI' => 5,
-    'BW' => 6
+    'BW' => 6,
   }.freeze
 end

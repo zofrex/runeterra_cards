@@ -9,9 +9,8 @@ module RuneterraCards
   # that card are in the collection, rather than having duplicate objects in the collection to represent duplicate
   # cards.
   class CardSet
-    attr_accessor :cards
+    attr_reader :cards
 
-    # @param cards [Enumerable<CardAndCount>]
     def initialize(cards)
       @cards = cards
     end

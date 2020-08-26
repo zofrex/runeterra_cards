@@ -20,6 +20,9 @@ Layout/SpaceAroundEqualsInParameterDefault:
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
 
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
 # Don't enforce block brace spaces in tests
 # because _{foo} is common there and matches _(foo), _ { foo } looks weird because it doesn't match _(foo)
 Layout/SpaceInsideBlockBraces:
