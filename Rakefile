@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require 'bundler/gem_tasks'
-require 'rake/testtask'
 
 require 'bundler'
 Bundler.require
+
+require 'rake/testtask'
+require 'rubocop/rake_task'
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
@@ -39,6 +41,8 @@ task :mutation_test do
   sh "bundle exec mutant --include lib --require 'runeterra_cards' --use minitest -- 'RuneterraCards*'"
 end
 
-task all_checks: %i[test coverage mutation_test]
+RuboCop::RakeTask.new
+
+task all_checks: %i[test coverage mutation_test rubocop]
 
 task default: :all_checks

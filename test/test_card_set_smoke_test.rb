@@ -20,7 +20,7 @@ describe RuneterraCards::CardSet do
           expected << RuneterraCards::CardAndCount.new(code: code, count: count.to_i)
         end
 
-        _(deck.cards).must_equal expected
+        _(deck.as_card_and_counts.to_set).must_equal expected
       end
     end
   end

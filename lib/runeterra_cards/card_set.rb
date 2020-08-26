@@ -9,13 +9,13 @@ module RuneterraCards
   # that card are in the collection, rather than having duplicate objects in the collection to represent duplicate
   # cards.
   class CardSet
-    # @return Set<CardAndCount>
-    attr_reader :cards
-
     # @param cards [Enumerable<CardAndCount>]
     def initialize(cards)
-      @cards = Set.new(cards)
+      @as_card_and_counts = cards
     end
+
+    # @return Enumerator<CardAndCount>
+    attr_reader :as_card_and_counts
 
     # @param deck_code [String]
     # @raise [Base32Error] if the deck code cannot be Base32 decoded.

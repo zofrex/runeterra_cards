@@ -8,20 +8,20 @@ describe RuneterraCards::CardSet do
   describe 'creation and retrieval' do
     it 'can be empty' do
       card_set = RuneterraCards::CardSet.new([])
-      _(card_set.cards).must_be_empty
+      _(card_set.as_card_and_counts.to_set).must_be_empty
     end
 
     it 'can contain a card' do
       card = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
       card_set = RuneterraCards::CardSet.new([card])
-      _(card_set.cards).must_include(card)
+      _(card_set.as_card_and_counts.to_set).must_include(card)
     end
 
     it 'can contain multiple cards' do
       card1 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
       card2 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 1, card_number: 7, count: 3)
       card_set = RuneterraCards::CardSet.new([card1, card2])
-      _(card_set.cards).must_equal(Set[card1, card2])
+      _(card_set.as_card_and_counts.to_set).must_equal(Set[card1, card2])
     end
   end
 
@@ -121,7 +121,7 @@ describe RuneterraCards::CardSet do
         cards = [0, 0, 0].pack('w*')
         code = Base32.encode(@fav_bytes + cards)
         card_set = RuneterraCards::CardSet.from_deck_code(code)
-        _(card_set.cards).must_equal Set.new
+        _(card_set.as_card_and_counts.to_set).must_equal Set.new
       end
 
       it 'handles a single card in the 3x section' do
@@ -139,7 +139,7 @@ describe RuneterraCards::CardSet do
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
         expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 3)]
-        _(card_set.cards).must_equal expected
+        _(card_set.as_card_and_counts.to_set).must_equal expected
       end
 
       it 'handles a single card in the 2x section' do
@@ -157,7 +157,7 @@ describe RuneterraCards::CardSet do
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
         expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 2)]
-        _(card_set.cards).must_equal expected
+        _(card_set.as_card_and_counts.to_set).must_equal expected
       end
 
       it 'handles a single card in the 1x section' do
@@ -175,7 +175,7 @@ describe RuneterraCards::CardSet do
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
         expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1)]
-        _(card_set.cards).must_equal expected
+        _(card_set.as_card_and_counts.to_set).must_equal expected
       end
 
       describe 'creates a card with the right set number' do
@@ -192,7 +192,7 @@ describe RuneterraCards::CardSet do
             code = Base32.encode(@fav_bytes + cards)
 
             card_set = RuneterraCards::CardSet.from_deck_code(code)
-            card = card_set.cards.first
+            card = card_set.as_card_and_counts.to_set.first
 
             _(card.code).must_match(/^0#{set_number}/)
           end
@@ -213,7 +213,7 @@ describe RuneterraCards::CardSet do
             code = Base32.encode(@fav_bytes + cards)
 
             card_set = RuneterraCards::CardSet.from_deck_code(code)
-            card = card_set.cards.first
+            card = card_set.as_card_and_counts.to_set.first
 
             _(card.code).must_match(/#{faction_identifier}/)
           end
@@ -235,7 +235,7 @@ describe RuneterraCards::CardSet do
             code = Base32.encode(@fav_bytes + cards)
 
             card_set = RuneterraCards::CardSet.from_deck_code(code)
-            card = card_set.cards.first
+            card = card_set.as_card_and_counts.to_set.first
 
             _(card.code).must_match(/0#{card_number}$/)
           end
@@ -264,7 +264,7 @@ describe RuneterraCards::CardSet do
           RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1),
           RuneterraCards::CardAndCount.new(set: 1, faction_number: 4, card_number: 16, count: 1),
         ]
-        _(card_set.cards).must_equal expected
+        _(card_set.as_card_and_counts.to_set).must_equal expected
       end
 
       it 'handles multiple cards in a single set/faction list' do
@@ -286,7 +286,7 @@ describe RuneterraCards::CardSet do
             RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1),
             RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 18, count: 1),
         ]
-        _(card_set.cards).must_equal expected
+        _(card_set.as_card_and_counts.to_set).must_equal expected
       end
     end
   end
