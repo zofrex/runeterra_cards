@@ -9,18 +9,33 @@ module RuneterraCards
   # that card are in the collection, rather than having duplicate objects in the collection to represent duplicate
   # cards.
   class CardSet
+    attr_accessor :cards
+
     # @param cards [Enumerable<CardAndCount>]
     def initialize(cards)
-      @cards = Hash[cards.map { |cac| [cac.code, cac.count] }]
+      @cards = cards
+    end
+
+    def self.from_card_and_counts(set)
+      new(Hash[set.map { |cac| [cac.code, cac.count] }])
+    end
+
+    def -(other)
+      remaining_cards = cards.each_with_object({}) do |(code, count), result|
+        new_count = count - other.count_for_card_code(code)
+        result[code] = new_count unless new_count.equal?(0)
+      end
+
+      CardSet.new(remaining_cards)
     end
 
     # @return Enumerator<CardAndCount>
     def as_card_and_counts
-      @cards.map { |code, count| CardAndCount.new(code: code, count: count) }
+      cards.map { |code, count| CardAndCount.new(code: code, count: count) }
     end
 
     def count_for_card_code(code)
-      @cards[code] || 0
+      cards[code] || 0
     end
 
     # @param deck_code [String]
@@ -38,7 +53,7 @@ module RuneterraCards
 
       int_array = binary_data[1..].unpack('w*')
       cards = assemble_card_list(int_array)
-      new(cards)
+      from_card_and_counts(cards)
     end
 
     # @param string [String] base32-encoded string

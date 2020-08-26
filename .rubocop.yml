@@ -17,6 +17,9 @@ Style/ParallelAssignment:
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
 # Don't enforce block brace spaces in tests
 # because _{foo} is common there and matches _(foo), _ { foo } looks weird because it doesn't match _(foo)
 Layout/SpaceInsideBlockBraces:

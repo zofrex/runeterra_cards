@@ -7,34 +7,57 @@ describe RuneterraCards::CardSet do
 
   describe 'creation and contents' do
     it 'can be empty' do
-      card_set = RuneterraCards::CardSet.new([])
+      card_set = RuneterraCards::CardSet.from_card_and_counts([])
       _(card_set.as_card_and_counts.to_set).must_be_empty
     end
 
     it 'can contain a card' do
       card = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
-      card_set = RuneterraCards::CardSet.new([card])
+      card_set = RuneterraCards::CardSet.from_card_and_counts([card])
       _(card_set.as_card_and_counts.to_set).must_include(card)
     end
 
     it 'can contain multiple cards' do
       card1 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
       card2 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 1, card_number: 7, count: 3)
-      card_set = RuneterraCards::CardSet.new([card1, card2])
+      card_set = RuneterraCards::CardSet.from_card_and_counts([card1, card2])
       _(card_set.as_card_and_counts.to_set).must_equal(Set[card1, card2])
+    end
+  end
+
+  describe '#-' do
+    it '3 - 1 = 2' do
+      set1 = RuneterraCards::CardSet.from_card_and_counts([RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)])
+      set2 = RuneterraCards::CardSet.from_card_and_counts([RuneterraCards::CardAndCount.new(code: '01DE044', count: 1)])
+      _((set1 - set2).cards).must_equal({ '01DE044' => 2 })
+    end
+
+    it 'removes a card if it reaches 0' do
+      set1 = RuneterraCards::CardSet.from_card_and_counts([RuneterraCards::CardAndCount.new(code: '01DE044', count: 1)])
+      set2 = RuneterraCards::CardSet.from_card_and_counts([RuneterraCards::CardAndCount.new(code: '01DE044', count: 1)])
+      _((set1 - set2).cards).must_equal({})
+    end
+
+    it "ignores cards on the RHS that aren't in the LHS" do
+      set1 = RuneterraCards::CardSet.from_card_and_counts([RuneterraCards::CardAndCount.new(code: '01DE044', count: 1)])
+      set2 = RuneterraCards::CardSet.from_card_and_counts([
+                                                            RuneterraCards::CardAndCount.new(code: '01DE044', count: 1),
+                                                            RuneterraCards::CardAndCount.new(code: '00DE017', count: 1),
+                                                          ])
+      _((set1 - set2).cards).must_equal({})
     end
   end
 
   describe '#count_for_card_code' do
     it 'retrieves the count for a card in the set' do
       card = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
-      card_set = RuneterraCards::CardSet.new([card])
+      card_set = RuneterraCards::CardSet.from_card_and_counts([card])
       _(card_set.count_for_card_code('01DE044')).must_equal(3)
     end
 
     it 'returns 0 for a card not in the set' do
       card = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
-      card_set = RuneterraCards::CardSet.new([card])
+      card_set = RuneterraCards::CardSet.from_card_and_counts([card])
       _(card_set.count_for_card_code('00DE075')).must_equal(0)
     end
   end
