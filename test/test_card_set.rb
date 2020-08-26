@@ -5,7 +5,7 @@ require_relative 'test_helper'
 describe RuneterraCards::CardSet do
   cover 'RuneterraCards::CardSet'
 
-  describe 'creation and retrieval' do
+  describe 'creation and contents' do
     it 'can be empty' do
       card_set = RuneterraCards::CardSet.new([])
       _(card_set.as_card_and_counts.to_set).must_be_empty
@@ -22,6 +22,20 @@ describe RuneterraCards::CardSet do
       card2 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 1, card_number: 7, count: 3)
       card_set = RuneterraCards::CardSet.new([card1, card2])
       _(card_set.as_card_and_counts.to_set).must_equal(Set[card1, card2])
+    end
+  end
+
+  describe '#count_for_card_code' do
+    it 'retrieves the count for a card in the set' do
+      card = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      card_set = RuneterraCards::CardSet.new([card])
+      _(card_set.count_for_card_code('01DE044')).must_equal(3)
+    end
+
+    it 'returns 0 for a card not in the set' do
+      card = RuneterraCards::CardAndCount.new(code: '01DE044', count: 3)
+      card_set = RuneterraCards::CardSet.new([card])
+      _(card_set.count_for_card_code('00DE075')).must_equal(0)
     end
   end
 

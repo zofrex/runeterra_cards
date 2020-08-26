@@ -11,11 +11,17 @@ module RuneterraCards
   class CardSet
     # @param cards [Enumerable<CardAndCount>]
     def initialize(cards)
-      @as_card_and_counts = cards
+      @cards = Hash[cards.map { |cac| [cac.code, cac.count] }]
     end
 
     # @return Enumerator<CardAndCount>
-    attr_reader :as_card_and_counts
+    def as_card_and_counts
+      @cards.map { |code, count| CardAndCount.new(code: code, count: count) }
+    end
+
+    def count_for_card_code(code)
+      @cards[code] || 0
+    end
 
     # @param deck_code [String]
     # @raise [Base32Error] if the deck code cannot be Base32 decoded.
