@@ -13,6 +13,7 @@ module RuneterraCards
       @cards = cards
     end
 
+    # @deprecated
     def self.from_card_and_counts(set)
       new(Hash[set.map { |cac| [cac.code, cac.count] }])
     end
@@ -27,6 +28,7 @@ module RuneterraCards
     end
 
     # @return Enumerator<CardAndCount>
+    # @deprecated
     def as_card_and_counts
       cards.map { |code, count| CardAndCount.new(code: code, count: count) }
     end

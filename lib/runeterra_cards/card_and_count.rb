@@ -2,6 +2,7 @@
 
 module RuneterraCards
   # Represents a card and how many of that card are in a collection.
+  # @deprecated
   class CardAndCount
     # The card code, for example "01DE123"
     # @return [String]
