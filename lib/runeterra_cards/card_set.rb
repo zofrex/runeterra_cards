@@ -5,9 +5,7 @@ require 'base32'
 module RuneterraCards
   # Represents a collection of cards.
   #
-  # A collection of cards is technically a collection of {CardAndCount}. Each object represents a card and how many of
-  # that card are in the collection, rather than having duplicate objects in the collection to represent duplicate
-  # cards.
+  # @todo The API to this class is very unstable and will change a lot in a coming release.
   class CardSet
     attr_reader :cards
 

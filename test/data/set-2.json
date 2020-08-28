@@ -1,26 +1,159 @@
 [
   {
+    "associatedCards": [],
+    "associatedCardRefs": [],
+    "assets": [
+      {
+        "gameAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02PZ001.png",
+        "fullAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02PZ001-full.png"
+      }
+    ],
+    "region": "Piltover & Zaun",
+    "regionRef": "PiltoverZaun",
+    "attack": 1,
+    "cost": 5,
+    "health": 5,
+    "description": "When I'm summoned, draw 1.\r\nThen, if you've played at least 10 other cards with different names, grant me +4|+0. <style=Variable></style>",
+    "descriptionRaw": "When I'm summoned, draw 1.\r\nThen, if you've played at least 10 other cards with different names, grant me +4|+0. ",
+    "levelupDescription": "",
+    "levelupDescriptionRaw": "",
+    "flavorText": "Nothing could stop his escape from those simpering humans. Not even a little water...",
+    "artistName": "SIXMOREVODKA",
     "name": "Subpurrsible",
     "cardCode": "02PZ001",
+    "keywords": [
+      "Elusive"
+    ],
+    "keywordRefs": [
+      "Elusive"
+    ],
+    "spellSpeed": "",
+    "spellSpeedRef": "",
+    "rarity": "EPIC",
     "rarityRef": "Epic",
+    "subtype": "",
+    "subtypes": [],
+    "supertype": "",
+    "type": "Unit",
     "collectible": true
   },
   {
+    "associatedCards": [],
+    "associatedCardRefs": [],
+    "assets": [
+      {
+        "gameAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02BW040.png",
+        "fullAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02BW040-full.png"
+      }
+    ],
+    "region": "Bilgewater",
+    "regionRef": "Bilgewater",
+    "attack": 2,
+    "cost": 1,
+    "health": 1,
+    "description": "",
+    "descriptionRaw": "",
+    "levelupDescription": "",
+    "levelupDescriptionRaw": "",
+    "flavorText": "\"MY GRATEST STRENF IS PREBABLE MY COMAND OF DA COMON PEEPUL AN ALSO APPARENLY MY SPELING IS RELLY GUD TO\" - Note scribbled in sand",
+    "artistName": "Kudos Productions",
     "name": "Shellshocker ",
     "cardCode": "02BW040",
+    "keywords": [
+      "Attune"
+    ],
+    "keywordRefs": [
+      "Attune"
+    ],
+    "spellSpeed": "",
+    "spellSpeedRef": "",
+    "rarity": "COMMON",
     "rarityRef": "Common",
+    "subtype": "",
+    "subtypes": [],
+    "supertype": "",
+    "type": "Unit",
     "collectible": true
   },
   {
+    "associatedCards": [],
+    "associatedCardRefs": [
+      "02BW032",
+      "02BW032T3"
+    ],
+    "assets": [
+      {
+        "gameAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02BW032T2.png",
+        "fullAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02BW032T2-full.png"
+      }
+    ],
+    "region": "Bilgewater",
+    "regionRef": "Bilgewater",
+    "attack": 0,
+    "cost": 1,
+    "health": 0,
+    "description": "Deal 1 to anything.\r\nIf this kills it, deal 1 to the enemy Nexus.\r\nShuffle a <link=card.level1><style=AssociatedCard>Gangplank</style></link> into your deck.",
+    "descriptionRaw": "Deal 1 to anything.\r\nIf this kills it, deal 1 to the enemy Nexus.\r\nShuffle a Gangplank into your deck.",
+    "levelupDescription": "",
+    "levelupDescriptionRaw": "",
+    "flavorText": "Gangplank's version of mediation is often brief, and always bloody.",
+    "artistName": "Kudos Productions",
     "name": "Gangplank's Parrrley",
     "cardCode": "02BW032T2",
+    "keywords": [
+      "Slow"
+    ],
+    "keywordRefs": [
+      "Slow"
+    ],
+    "spellSpeed": "Slow",
+    "spellSpeedRef": "Slow",
+    "rarity": "None",
     "rarityRef": "None",
+    "subtype": "",
+    "subtypes": [],
+    "supertype": "Champion",
+    "type": "Spell",
     "collectible": false
   },
   {
+    "associatedCards": [],
+    "associatedCardRefs": [],
+    "assets": [
+      {
+        "gameAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02BW034T1.png",
+        "fullAbsolutePath": "http://dd.b.pvp.net/1_7_0/set2/en_us/img/cards/02BW034T1-full.png"
+      }
+    ],
+    "region": "Bilgewater",
+    "regionRef": "Bilgewater",
+    "attack": 2,
+    "cost": 1,
+    "health": 1,
+    "description": "<link=keyword.Last Breath><sprite name=LastBreath><style=Keyword>Last Breath</style></link>: Deal 1 to the enemy Nexus.",
+    "descriptionRaw": "Last Breath: Deal 1 to the enemy Nexus.",
+    "levelupDescription": "",
+    "levelupDescriptionRaw": "",
+    "flavorText": "\"Mischievous little scamps, ain't they? More help than they seem, but word is they've got explosive tempers...\" - Syren deckhand",
+    "artistName": "Kudos Productions",
     "name": "Powder Monkey",
     "cardCode": "02BW034T1",
+    "keywords": [
+      "Ephemeral",
+      "Last Breath"
+    ],
+    "keywordRefs": [
+      "Ephemeral",
+      "LastBreath"
+    ],
+    "spellSpeed": "",
+    "spellSpeedRef": "",
+    "rarity": "None",
     "rarityRef": "None",
+    "subtype": "",
+    "subtypes": [],
+    "supertype": "",
+    "type": "Unit",
     "collectible": false
   }
 ]

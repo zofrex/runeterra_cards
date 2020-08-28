@@ -8,6 +8,15 @@ module RuneterraCards
   #
   # @see CardAndCount
   class CardMetadata
+    RARITIES = {
+      'None' => :none,
+      'Common' => :common,
+      'Rare' => :rare,
+      'Epic' => :epic,
+      'Champion' => :champion,
+    }.freeze
+    private_constant :RARITIES
+
     # Returns the name attribute. The name is the localised name that the card would have in game.
     # For example: "House Spider".
     # @return [String]
@@ -16,6 +25,10 @@ module RuneterraCards
     # Returns the card_code attribute. For example: "01NX055".
     # @return [String]
     attr_reader :card_code
+
+    # Returns the card's rarity as a symbol. Can be one of: +:none+, +:common+, +:rare+, +:epic+, or +:champion+
+    # @return [Symbol]
+    attr_reader :rarity
 
     # Creates a single {CardMetadata} Object from the supplied Hash of data.
     # This is intended for use with the data files from Legends of Runeterra Data Dragon, and it expects a Hash
@@ -26,11 +39,20 @@ module RuneterraCards
     # @option hash [String] cardCode
     # @option hash [Boolean] collectible
     #
-    # @raise [MissingCardDataError] if any of the expected hash parameters are missing
+    # @raise [MissingCardDataError] if any of the expected hash parameters are missing, or if +rarityRef+ contains an
+    #   unexpected value.
     def initialize(hash)
-      @name, @card_code, @collectible = hash.fetch_values('name', 'cardCode', 'collectible')
-    rescue KeyError => e
-      raise MissingCardDataError.new(e.key, hash['name'] || hash['cardCode'])
+      begin
+        @name, @card_code, @collectible, rarity_ref = hash.fetch_values('name', 'cardCode', 'collectible', 'rarityRef')
+      rescue KeyError => e
+        raise MetadataLoadError.new(hash['name'] || hash['cardCode'], "Missing expected key: #{e.key}")
+      end
+
+      @rarity = RARITIES[rarity_ref]
+      return unless rarity.nil?
+
+      raise MetadataLoadError.new(name, "Invalid value for rarityRef, got: #{rarity_ref}, "\
+"expected one of: #{RARITIES.keys.join ', '}")
     end
 
     # Whether or not the card is collectible.

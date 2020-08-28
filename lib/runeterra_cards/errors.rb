@@ -35,28 +35,25 @@ Possibly an invalid deck code, possibly you need to update the deck code library
     end
   end
 
-  # This exception is raised if you try to parse card data that is missing expected attributes.
+  # This exception is raised if you try to parse data from Runeterra Data Dragon that is not in the expected form.
+  # The message will tell you what data was not right, and the {#card} attribute will tell you which card had issues,
+  # if possible.
   #
   # @see CardMetadata#initialize
-  class MissingCardDataError < StandardError
-    # Return the name of the expected key that was missing from the hash.
-    # NB: If multiple keys were missing, this will only tell you about the first that was encountered.
-    # @return [String]
-    attr_reader :missing_key
-
+  class MetadataLoadError < StandardError
     # Return the name or card code of the card that was missing an expected attribute.
     # @return [String] name if the name was present
     # @return [String] card code if the name was not present
     # @return [nil] if neither name nor card code were present
     attr_reader :card
 
-    def initialize(missing_key, card)
+    def initialize(card, problem)
       if card.nil?
-        super("Unknown card (no code or name) was missing required key #{missing_key}")
+        super("Error loading data for unknown card (no code or name): #{problem}")
       else
-        super("Card #{card} was missing required key #{missing_key}")
+        super("Error loading data for card #{card}: #{problem}")
       end
-      @missing_key, @card = missing_key, card
+      @card = card
     end
   end
 end
