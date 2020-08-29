@@ -8,11 +8,18 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.6'
 
-  s.authors = ['zofrex']
+  s.author = 'James "zofrex" Sanderson'
   s.email = ['zofrex@gmail.com']
-  s.summary = 'Legends of Runeterra deck encoder/decoder and general purpose card info'
+  s.summary = 'Legends of Runeterra deck code decoder & Data Dragon card data loader.'
   s.description = s.summary
   s.licenses = ['MIT']
+
+  s.metadata = {
+    'bug_tracker_uri' => 'https://github.com/zofrex/runeterra_cards/issues',
+    'changelog_uri' => 'https://www.rubydoc.info/gems/runeterra_cards/doc/CHANGELOG.md',
+    'mailing_list_uri' => 'https://groups.example.com/bestgemever',
+    'source_code_uri' => 'https://github.com/zofrex/runeterra_cards',
+  }
 
   s.executables   = []
   s.require_paths = ['lib']
