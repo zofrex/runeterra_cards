@@ -33,9 +33,11 @@ Layout/SpaceBeforeBlockBraces:
     - 'test/**'
 
 # Not a relevant metric for tests, where we organise tests by block and those blocks get pretty large
+# Also not relevant for gemspec
 Metrics/BlockLength:
   Exclude:
     - 'test/**'
+    - runeterra_cards.gemspec
 
 # Just no.
 Style/AsciiComments:
