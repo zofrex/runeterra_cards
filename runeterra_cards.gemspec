@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.metadata = {
     'bug_tracker_uri' => 'https://github.com/zofrex/runeterra_cards/issues',
     'changelog_uri' => 'https://www.rubydoc.info/gems/runeterra_cards/doc/CHANGELOG.md',
-    'mailing_list_uri' => 'https://groups.example.com/bestgemever',
     'source_code_uri' => 'https://github.com/zofrex/runeterra_cards',
   }
 
