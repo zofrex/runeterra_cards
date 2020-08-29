@@ -23,7 +23,7 @@ module RuneterraCards
         @code = code
       else
         padded_set = format('%<i>02d', i: set)
-        faction = FACTION_IDENTIFIERS_FROM_INT.fetch(faction_number)
+        faction = FACTION_IDENTIFIERS_FROM_INT.fetch(faction_number) { |key| raise UnrecognizedFactionError, key }
         padded_card_number = format('%<i>03d', i: card_number)
         @code = "#{padded_set}#{faction}#{padded_card_number}"
       end

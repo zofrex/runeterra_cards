@@ -29,6 +29,25 @@ describe RuneterraCards::CardAndCount do
       card = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 2, count: 3)
       _(card.count).must_equal(3)
     end
+
+    describe 'unknown faction number' do
+      it 'gives a good error' do
+        _{RuneterraCards::CardAndCount.new(set: 1, faction_number: 7, card_number: 1, count: 1)}
+          .must_raise(RuneterraCards::UnrecognizedFactionError)
+      end
+
+      it 'gives a helpful error message' do
+        e = _{RuneterraCards::CardAndCount.new(set: 1, faction_number: 7, card_number: 1, count: 1)}
+            .must_raise(RuneterraCards::UnrecognizedFactionError)
+        _(e.message).must_match(/unrecognized faction.*'7'\..*update.*library/i)
+      end
+
+      it 'includes the faction number in the error' do
+        e = _{RuneterraCards::CardAndCount.new(set: 1, faction_number: 7, card_number: 1, count: 1)}
+            .must_raise(RuneterraCards::UnrecognizedFactionError)
+        _(e.faction_number).must_equal(7)
+      end
+    end
   end
 
   describe 'initialise from card code' do

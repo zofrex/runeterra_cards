@@ -39,6 +39,24 @@ Possibly an invalid deck code, possibly you need to update the deck code library
     end
   end
 
+  # This exception is raised if the deck code contains an unexpected faction number. (see the table at
+  # {https://github.com/RiotGames/LoRDeckCodes} for what 'faction number' means.) This most likely means that
+  # Legends of Runeterra has a new faction and you need to update to a newer version of this library to handle it.
+  #
+  # Check that the {#faction_number} causing issues is listed in {https://github.com/RiotGames/LoRDeckCodes
+  # the table on Github}. If it isn't then something else has gone wrong. If it is, and updating this library doesn't
+  # fix the issue, then the library needs updating - {https://github.com/zofrex/runeterra_cards/issues file an issue}.
+  class UnrecognizedFactionError < DeckCodeParseError
+    # @return [Fixnum] the faction number that was unrecognized
+    attr_reader :faction_number
+
+    def initialize(faction_number)
+      super("Unrecognized faction number '#{faction_number}'."\
+        ' Possibly you need to update this library to a newer version')
+      @faction_number = faction_number
+    end
+  end
+
   # This exception is raised if you try to parse data from Runeterra Data Dragon that is not in the expected form.
   # The message will tell you what data was not right, and the {#card} attribute will tell you which card had issues,
   # if possible.
