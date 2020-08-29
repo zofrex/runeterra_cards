@@ -113,6 +113,11 @@ describe RuneterraCards::CardSet do
           err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
           _(err.message).must_match(/was expecting: 2/)
         end
+
+        it 'includes the version we got in the error object' do
+          err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
+          _(err.version).must_equal(3)
+        end
       end
 
       describe 'invalid format' do

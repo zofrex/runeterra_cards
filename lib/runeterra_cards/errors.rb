@@ -29,9 +29,13 @@ module RuneterraCards
   # issue relating to this. If none exists, then file one!
   # @see SUPPORTED_VERSION
   class UnrecognizedVersionError < DeckCodeParseError
+    # @return [Fixnum] the version number encountered in the deck code
+    attr_accessor :version
+
     def initialize(expected, got)
       super("Unrecognized deck code version number: #{got}, was expecting: #{expected}. \
 Possibly an invalid deck code, possibly you need to update the deck code library version.")
+      @version = got
     end
   end
 
