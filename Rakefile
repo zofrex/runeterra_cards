@@ -33,16 +33,27 @@ task :add_pending_cops do
   puts "Added #{pending.length} cops to .rubocop_pending.yml"
 end
 
+desc 'Fast and approximate code coverage checking (branch-level coverage checking)'
 task :coverage do
   sh 'bundle exec deep-cover clone rake test'
 end
 
+desc 'Thorough code coverage checking via mutation testing (semantic coverage checking)'
 task :mutation_test do
   sh "bundle exec mutant --include lib --require 'runeterra_cards' --use minitest -- 'RuneterraCards*'"
 end
 
+desc 'Incremental mutation testing (tests everything that has changed since the most recent commit)'
+task :mutation_test_incremental do
+  sh "bundle exec mutant --include lib --require 'runeterra_cards' --use minitest --since HEAD -- 'RuneterraCards*'"
+end
+
 RuboCop::RakeTask.new
 
+desc 'Run all checks (tests, full coverage, style checks)'
 task all_checks: %i[test coverage mutation_test rubocop]
 
-task default: :all_checks
+desc 'Run all fast checks (useful for development)'
+task quick_check: %i[test mutation_test_incremental rubocop]
+
+task default: :quick_check
