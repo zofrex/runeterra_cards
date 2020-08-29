@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.executables   = []
   s.require_paths = ['lib']
-  s.files         = Dir['lib/**/*', 'LICENSE.txt']
+  s.files         = Dir['lib/**/*', 'LICENSE.txt', 'doc/**/*']
 
   s.add_dependency 'base32', '~> 0.3.2'
   s.add_development_dependency 'bundler', '~> 2.0'
