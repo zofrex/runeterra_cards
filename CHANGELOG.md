@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Added support for the Mount Targon faction
 - UnrecognizedVersionError#version returns the version number that wasn't recognized.
 - UnrecognizedFactionError, which is raised by CardAndCount#new (and by extension, CardSet#from_deck_code) if an unrecognized faction number is encountered.
+
+### Changed
+- FACTION_IDENTIFIERS_FROM_INT is now a Hash instead of an Array. The API for looking up a faction identifier by integer should remain unchanged in most cases.
 
 ## [0.1.0] - 2020-08-28
 ### Added

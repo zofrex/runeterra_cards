@@ -1,11 +1,20 @@
 # frozen_string_literal: true
 
 module RuneterraCards
-  # An array of the two-letter Faction identifiers, indexed by their integer identifiers
+  # An map from integer faction identifiers to their two-letter identifiers
   # @example
   #   FACTION_IDENTIFIERS_FROM_INT[2] #=> "IO"
-  # @return [Array<String>]
-  FACTION_IDENTIFIERS_FROM_INT = %w[DE FR IO NX PZ SI BW].freeze
+  # @return [Hash<Fixnum,String>]
+  FACTION_IDENTIFIERS_FROM_INT = {
+    0 => 'DE',
+    1 => 'FR',
+    2 => 'IO',
+    3 => 'NX',
+    4 => 'PZ',
+    5 => 'SI',
+    6 => 'BW',
+    9 => 'MT',
+  }.freeze
 
   # A map from two-letter Faction identifiers to their integer identifiers
   # @example
@@ -19,5 +28,6 @@ module RuneterraCards
     'PZ' => 4,
     'SI' => 5,
     'BW' => 6,
+    'MT' => 9,
   }.freeze
 end
