@@ -5,6 +5,6 @@ require_relative 'test_helper'
 describe RuneterraCards do
   cover 'RuneterraCards::VERSION'
   it 'returns a version' do
-    _(RuneterraCards::VERSION).must_equal '0.2.0'
+    _(RuneterraCards::VERSION).must_equal '0.2.1'
   end
 end
