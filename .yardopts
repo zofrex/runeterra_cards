@@ -1,4 +1,5 @@
 --output-dir yard
 --readme doc/README.md
+--load doc/version_helper.rb
 -
 doc/*
