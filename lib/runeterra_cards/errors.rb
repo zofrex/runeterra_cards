@@ -8,6 +8,7 @@ module RuneterraCards
   # This exception is raised if the deck code cannot be Base32-decoded. This probably means it isn't a deck code, or
   # got malformed somehow.
   class Base32Error < DeckCodeParseError
+    # Returns a new instance of Base32Error with a helpful error message preloaded.
     def initialize
       super('Encountered an error while Base32 decoding deck code.' \
         ' Probably an invalid deck code, or possibly a bug in the Base32 handling.')
@@ -16,6 +17,7 @@ module RuneterraCards
 
   # This exception is raised if the deck code is an empty string.
   class EmptyInputError < DeckCodeParseError
+    # Returns a new instance of EmptyInputError with a helpful error message preloaded.
     def initialize
       super('The input was an empty string')
     end
@@ -32,6 +34,8 @@ module RuneterraCards
     # @return [Fixnum] the version number encountered in the deck code
     attr_accessor :version
 
+    # @param [Fixnum] expected The version number we were expecting to see in the deck code.
+    # @param [Fixnum] got The version number we actually got.
     def initialize(expected, got)
       super("Unrecognized deck code version number: #{got}, was expecting: #{expected}. \
 Possibly an invalid deck code, possibly you need to update the deck code library version.")
@@ -50,6 +54,7 @@ Possibly an invalid deck code, possibly you need to update the deck code library
     # @return [Fixnum] the faction number that was unrecognized
     attr_reader :faction_number
 
+    # @param [Fixnum] faction_number The faction number we encountered and did not recognise.
     def initialize(faction_number)
       super("Unrecognized faction number '#{faction_number}'."\
         ' Possibly you need to update this library to a newer version')
@@ -61,7 +66,7 @@ Possibly an invalid deck code, possibly you need to update the deck code library
   # The message will tell you what data was not right, and the {#card} attribute will tell you which card had issues,
   # if possible.
   #
-  # @see CardMetadata#initialize
+  # @see CardMetadata#initialize CardMetadata#initialize for details on when this error is raised.
   class MetadataLoadError < StandardError
     # Return the name or card code of the card that was missing an expected attribute.
     # @return [String] name if the name was present
@@ -69,6 +74,8 @@ Possibly an invalid deck code, possibly you need to update the deck code library
     # @return [nil] if neither name nor card code were present
     attr_reader :card
 
+    # @param [String] card The card's name or cardCode.
+    # @param [String] problem Details on the problem encountered loading the card.
     def initialize(card, problem)
       if card.nil?
         super("Error loading data for unknown card (no code or name): #{problem}")
@@ -78,6 +85,12 @@ Possibly an invalid deck code, possibly you need to update the deck code library
       @card = card
     end
 
+    # Create a {MetadataLoadError MetadataLoadError} with a helpful message regarding an invalid value for rarityRef.
+    # @param [String] card The card name that had an invalid rarityRef value.
+    #
+    # @param [String] given The value that rarityRef had.
+    # @param [Enumerable<String>] expected A list of values that would have been valid.
+    # @return [MetadataLoadError]
     def self.invalid_rarity(card, given, expected)
       new(card, "Invalid value for rarityRef, got: #{given}, expected one of: #{expected.join ', '}")
     end

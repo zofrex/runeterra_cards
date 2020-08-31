@@ -20,6 +20,7 @@ module RuneterraCards
   # @note This class cannot yet handle metadata for multiple locales at the same time. You will need multiple instances
   #   of this class, one for each locale, if you wish to handle multiple locales at this time.
   class Metadata
+    # Create a new, empty, metadata repository.
     def initialize
       @cards = {}
     end

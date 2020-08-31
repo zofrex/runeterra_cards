@@ -9,6 +9,11 @@ require 'runeterra_cards/metadata'
 require 'runeterra_cards/card_set'
 require 'runeterra_cards/cost'
 
+# The top-level module for +runeterra_cards+.
+#
+# Some of the most useful classes are {CardSet} and {Metadata}.
+#
+# You might also want to check out the {file:doc/README.md} and the {file:doc/CHANGELOG.md}.
 module RuneterraCards
   # The version of deck encoding supported
   SUPPORTED_VERSION = 2

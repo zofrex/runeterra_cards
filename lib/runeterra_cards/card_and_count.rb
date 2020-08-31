@@ -30,10 +30,12 @@ module RuneterraCards
       @count = count
     end
 
+    #:nodoc:
     def eql?(other)
       code.eql?(other.code) && count.equal?(other.count)
     end
 
+    #:nodoc:
     def hash
       [code, count].hash
     end

@@ -7,6 +7,7 @@ Bundler.require
 
 require 'rake/testtask'
 require 'rubocop/rake_task'
+require 'yard'
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
@@ -96,8 +97,13 @@ end
 
 RuboCop::RakeTask.new
 
+desc 'Verify there are no warnings from Yard documentation generation'
+YARD::Rake::YardocTask.new(:verify_docs) do |t|
+  t.options = %w[--fail-on-warning --no-output --no-save]
+end
+
 desc 'Run all checks (tests, full coverage, style checks)'
-task all_checks: %i[test coverage mutation_test rubocop]
+task all_checks: %i[test coverage mutation_test rubocop verify_docs]
 
 desc 'Run all fast checks (useful for development)'
 task quick_check: %i[test mutation_test_incremental rubocop]

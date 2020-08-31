@@ -74,9 +74,8 @@ Style/DateTime:
 Style/DisableCopsWithinSourceCodeDirective:
   Enabled: true
 
-## TODO enable this one
-#Style/DocumentationMethod:
-#  Enabled: true
+Style/DocumentationMethod:
+  Enabled: true
 
 Style/ImplicitRuntimeError:
   Enabled: true
