@@ -22,5 +22,12 @@ module RuneterraCards
         epic * 1200 +
         champion * 3000
     end
+
+    def ==(other)
+      common.equal?(other.common) &&
+        rare.equal?(other.rare) &&
+        epic.equal?(other.epic) &&
+        champion.equal?(other.champion)
+    end
   end
 end

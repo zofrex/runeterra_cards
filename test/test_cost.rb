@@ -76,4 +76,36 @@ describe RuneterraCards::Cost do
       _(RuneterraCards::Cost.new(13, 8, 5, 3).shards).must_equal(13 * 100 + 8 * 300 + 5 * 1200 + 3 * 3000)
     end
   end
+
+  describe '#==' do
+    it 'matches for zero cost' do
+      cost1 = RuneterraCards::Cost.new(0, 0, 0, 0)
+      cost2 = RuneterraCards::Cost.new(0, 0, 0, 0)
+      _(cost1).must_equal(cost2)
+    end
+
+    it 'returns false if common differs' do
+      cost1 = RuneterraCards::Cost.new(0, 0, 0, 0)
+      cost2 = RuneterraCards::Cost.new(1, 0, 0, 0)
+      _(cost1).wont_equal(cost2)
+    end
+
+    it 'returns false if rare differs' do
+      cost1 = RuneterraCards::Cost.new(0, 0, 0, 0)
+      cost2 = RuneterraCards::Cost.new(0, 1, 0, 0)
+      _(cost1).wont_equal(cost2)
+    end
+
+    it 'returns false if epic differs' do
+      cost1 = RuneterraCards::Cost.new(0, 0, 0, 0)
+      cost2 = RuneterraCards::Cost.new(0, 0, 1, 0)
+      _(cost1).wont_equal(cost2)
+    end
+
+    it 'returns false if champion differs' do
+      cost1 = RuneterraCards::Cost.new(0, 0, 0, 0)
+      cost2 = RuneterraCards::Cost.new(0, 0, 0, 1)
+      _(cost1).wont_equal(cost2)
+    end
+  end
 end
