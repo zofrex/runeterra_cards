@@ -7,6 +7,7 @@ require 'runeterra_cards/card_and_count'
 require 'runeterra_cards/card_metadata'
 require 'runeterra_cards/metadata'
 require 'runeterra_cards/card_set'
+require 'runeterra_cards/cost'
 
 module RuneterraCards
   # The version of deck encoding supported
