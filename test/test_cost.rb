@@ -108,4 +108,58 @@ describe RuneterraCards::Cost do
       _(cost1).wont_equal(cost2)
     end
   end
+
+  describe '#-' do
+    describe 'minuend > subtrahend' do
+      it 'subtracts common counts' do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(2, 0, 0, 0)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(11, 8, 5, 3))
+      end
+
+      it 'subtracts rare counts' do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(0, 3, 0, 0)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(13, 5, 5, 3))
+      end
+
+      it 'subtracts epic counts' do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(0, 0, 4, 0)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(13, 8, 1, 3))
+      end
+
+      it 'subtracts champion counts' do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(0, 0, 0, 1)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(13, 8, 5, 2))
+      end
+    end
+
+    describe 'minuend < subtrahend' do
+      it "common counts won't go below zero" do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(15, 0, 0, 0)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(0, 8, 5, 3))
+      end
+
+      it "rare counts won't go below zero" do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(0, 20, 0, 0)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(13, 0, 5, 3))
+      end
+
+      it "epic counts won't go below zero" do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(0, 0, 6, 0)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(13, 8, 0, 3))
+      end
+
+      it "champion counts won't go below zero" do
+        minuend = RuneterraCards::Cost.new(13, 8, 5, 3)
+        subtrahend = RuneterraCards::Cost.new(0, 0, 0, 5)
+        _(minuend - subtrahend).must_equal(RuneterraCards::Cost.new(13, 8, 5, 0))
+      end
+    end
+  end
 end

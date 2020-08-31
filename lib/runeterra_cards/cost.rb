@@ -29,5 +29,14 @@ module RuneterraCards
         epic.equal?(other.epic) &&
         champion.equal?(other.champion)
     end
+
+    def -(other)
+      Cost.new(
+        [common   - other.common,   0].max,
+        [rare     - other.rare,     0].max,
+        [epic     - other.epic,     0].max,
+        [champion - other.champion, 0].max
+      )
+    end
   end
 end
