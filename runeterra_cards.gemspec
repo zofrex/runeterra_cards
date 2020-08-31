@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
     'bug_tracker_uri' => 'https://github.com/zofrex/runeterra_cards/issues',
     'changelog_uri' => 'https://www.rubydoc.info/gems/runeterra_cards/doc/CHANGELOG.md',
     'source_code_uri' => 'https://github.com/zofrex/runeterra_cards',
+    'documentation_uri' => 'https://www.rubydoc.info/gems/runeterra_cards/',
   }
 
   s.executables   = []
