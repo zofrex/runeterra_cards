@@ -17,7 +17,7 @@ describe RuneterraCards::CardSet do
         expected = Set[]
         test_data.each do |card|
           count, code = card.split(':')
-          expected << RuneterraCards::CardAndCount.new(code: code, count: count.to_i)
+          expected << RuneterraCards::CardAndCount.new(code: code, count: Integer(count, 10))
         end
 
         _(deck.as_card_and_counts.to_set).must_equal expected

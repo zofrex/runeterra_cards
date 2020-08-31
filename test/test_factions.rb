@@ -16,7 +16,7 @@ describe RuneterraCards do
   9	MT	Mount Targon
   TABLE
 
-  FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [line[0].to_i, line[1], line[2]]}.freeze
+  FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [Integer(line[0], 10), line[1], line[2]]}.freeze
 
   describe 'FACTION_IDENTIFIERS_FROM_INT' do
     FACTIONS.each do |integer_identifier, faction_identifier, faction_name|

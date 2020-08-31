@@ -1,0 +1,119 @@
+# Enable, or try enabling, every single cop and see what happens:
+
+Bundler/GemComment:
+  Enabled: true
+
+Layout/ClassStructure:
+  Enabled: true
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+
+Layout/HeredocArgumentClosingParenthesis:
+  Enabled: true
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+
+## Might want to look into this one, sounds important, but flags EVERYTHING
+#Lint/ConstantResolution:
+#  Enabled: true
+
+Lint/HeredocMethodCallPosition:
+  Enabled: true
+
+Lint/NumberConversion:
+  Enabled: true
+
+Performance/CaseWhenSplat:
+  Enabled: true
+
+Performance/IoReadlines:
+  Enabled: true
+
+Performance/OpenStruct:
+  Enabled: true
+
+Style/AsciiComments:
+  Enabled: true
+
+Style/AutoResourceCleanup:
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/ConstantVisibility:
+  Enabled: true
+
+## What even is this
+#Style/Copyright:
+#  Enabled: true
+
+Style/DateTime:
+  Enabled: true
+
+Style/DisableCopsWithinSourceCodeDirective:
+  Enabled: true
+
+## TODO enable this one
+#Style/DocumentationMethod:
+#  Enabled: true
+
+Style/ImplicitRuntimeError:
+  Enabled: true
+
+Style/InlineComment:
+  Enabled: true
+  Exclude:
+    - 'test/**'
+
+Style/IpAddresses:
+  Enabled: true
+
+## Isn't that the fun of Ruby?
+#Style/MethodCallWithArgsParentheses:
+#  Enabled: true
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Style/MultilineMethodSignature:
+  Enabled: true
+
+Style/OptionHash:
+  Enabled: true
+
+Style/ReturnNil:
+  Enabled: true
+
+Style/SingleLineBlockParams:
+  Enabled: true
+
+## You legit need these sometimes!
+#Style/StringHashKeys:
+#  Enabled: true
+
+Style/StringMethods:
+  Enabled: true
+
+Style/TrailingCommaInBlockArgs:
+  Enabled: true

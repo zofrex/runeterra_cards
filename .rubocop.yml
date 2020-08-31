@@ -5,6 +5,7 @@ require:
 
 inherit_from:
   - .rubocop_pending.yml
+  - .rubocop_be_pedantic.yml
 
 AllCops:
   TargetRubyVersion: 2.6

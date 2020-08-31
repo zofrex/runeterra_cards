@@ -77,5 +77,9 @@ Possibly an invalid deck code, possibly you need to update the deck code library
       end
       @card = card
     end
+
+    def self.invalid_rarity(card, given, expected)
+      new(card, "Invalid value for rarityRef, got: #{given}, expected one of: #{expected.join ', '}")
+    end
   end
 end

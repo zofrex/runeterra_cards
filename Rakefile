@@ -53,7 +53,7 @@ task :check_versions_match do
   found_gemspec_instructions = false
 
   Dir.glob('doc/**.md').each do |doc_file|
-    File.readlines(doc_file).select { |line| line.include?("gem 'runeterra_cards'") }.each do |gemline|
+    File.open(doc_file, 'r').each_line.select { |line| line.include?("gem 'runeterra_cards'") }.each do |gemline|
       found_gemfile_instructions = true
       next if gemline.include?("'~> #{RuneterraCards::VERSION}'")
 
@@ -64,7 +64,8 @@ task :check_versions_match do
       ERROR
     end
 
-    File.readlines(doc_file).select { |line| line.include?("add_dependency 'runeterra_cards'") }.each do |specline|
+    File.open(doc_file, 'r').each_line
+        .select { |line| line.include?("add_dependency 'runeterra_cards'") }.each do |specline|
       found_gemspec_instructions = true
       next if specline.include?("'~> #{RuneterraCards::VERSION}'")
 
@@ -84,11 +85,11 @@ task :check_changelog do
   require 'date'
   expected_entry = "## [#{RuneterraCards::VERSION}] - #{Date.today.iso8601}"
 
-  unless File.readlines('doc/CHANGELOG.md').any? { |line| line.include? expected_entry }
+  unless File.open('doc/CHANGELOG.md', 'r').each_line.any? { |line| line.include? expected_entry }
     abort "No entry matching #{expected_entry} found in CHANGELOG"
   end
 
-  if File.readlines('doc/CHANGELOG.md').any? { |line| line.match?(/##.*Unreleased/i) }
+  if File.open('doc/CHANGELOG.md', 'r').each_line.any? { |line| line.match?(/##.*Unreleased/i) }
     abort "'Unreleased' entry found in CHANGELOG"
   end
 end

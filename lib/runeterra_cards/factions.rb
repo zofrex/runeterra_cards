@@ -15,6 +15,7 @@ module RuneterraCards
     6 => 'BW',
     9 => 'MT',
   }.freeze
+  public_constant :FACTION_IDENTIFIERS_FROM_INT
 
   # A map from two-letter Faction identifiers to their integer identifiers
   # @example
@@ -30,4 +31,5 @@ module RuneterraCards
     'BW' => 6,
     'MT' => 9,
   }.freeze
+  public_constant :FACTION_INTS_FROM_IDENTIFIER
 end

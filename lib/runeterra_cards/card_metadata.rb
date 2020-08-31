@@ -51,8 +51,7 @@ module RuneterraCards
       @rarity = RARITIES[rarity_ref]
       return unless rarity.nil?
 
-      raise MetadataLoadError.new(name, "Invalid value for rarityRef, got: #{rarity_ref}, "\
-"expected one of: #{RARITIES.keys.join ', '}")
+      raise MetadataLoadError.invalid_rarity(name, rarity_ref, RARITIES.keys)
     end
 
     # Whether or not the card is collectible.
