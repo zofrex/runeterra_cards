@@ -80,6 +80,19 @@ task :check_versions_match do
   abort "Didn't find gemspec instructions anywhere!" unless found_gemspec_instructions
 end
 
+task :check_changelog do
+  require 'date'
+  expected_entry = "## [#{RuneterraCards::VERSION}] - #{Date.today.iso8601}"
+
+  unless File.readlines('doc/CHANGELOG.md').any? { |line| line.include? expected_entry }
+    abort "No entry matching #{expected_entry} found in CHANGELOG"
+  end
+
+  if File.readlines('doc/CHANGELOG.md').any? { |line| line.match?(/##.*Unreleased/i) }
+    abort "'Unreleased' entry found in CHANGELOG"
+  end
+end
+
 RuboCop::RakeTask.new
 
 desc 'Run all checks (tests, full coverage, style checks)'
@@ -88,6 +101,7 @@ task all_checks: %i[test coverage mutation_test rubocop]
 desc 'Run all fast checks (useful for development)'
 task quick_check: %i[test mutation_test_incremental rubocop]
 
+task check_docs_for_release: %i[check_versions_match check_changelog]
 task default: :quick_check
 
-task build: %i[all_checks check_versions_match]
+task build: %i[all_checks check_docs_for_release]
