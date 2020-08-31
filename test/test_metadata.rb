@@ -65,4 +65,92 @@ describe RuneterraCards::Metadata do
                                    })
     end
   end
+
+  describe '#cost_of' do
+    COMMON_CARD_1   = '01IO020'
+    COMMON_CARD_2   = '01PZ007'
+    RARE_CARD_1     = '01DE019'
+    RARE_CARD_2     = '01NX004'
+    EPIC_CARD_1     = '01DE031'
+    EPIC_CARD_2     = '01PZ013'
+    CHAMPION_CARD_1 = '01DE022'
+    CHAMPION_CARD_2 = '01PZ056'
+
+    before do
+      @m.add_set_file(File.join(__dir__, './data/all-rarities.json'))
+    end
+
+    it 'returns 0 shards for an empty set' do
+      set = RuneterraCards::CardSet.new([])
+      _(@m.cost_of(set).shards).must_equal(0)
+    end
+
+    describe 'counts common cards' do
+      it 'sums one card' do
+        set = RuneterraCards::CardSet.new({ COMMON_CARD_1 => 1 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(1, 0, 0, 0))
+      end
+
+      it 'sums two of the same card' do
+        set = RuneterraCards::CardSet.new({ COMMON_CARD_1 => 2 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(2, 0, 0, 0))
+      end
+
+      it 'sums two different cards' do
+        set = RuneterraCards::CardSet.new({ COMMON_CARD_1 => 2, COMMON_CARD_2 => 3 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(5, 0, 0, 0))
+      end
+    end
+
+    describe 'counts rare cards' do
+      it 'sums one card' do
+        set = RuneterraCards::CardSet.new({ RARE_CARD_1 => 1 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 1, 0, 0))
+      end
+
+      it 'sums two of the same card' do
+        set = RuneterraCards::CardSet.new({ RARE_CARD_1 => 2 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 2, 0, 0))
+      end
+
+      it 'sums two different cards' do
+        set = RuneterraCards::CardSet.new({ RARE_CARD_1 => 2, RARE_CARD_2 => 3 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 5, 0, 0))
+      end
+    end
+
+    describe 'counts epic cards' do
+      it 'sums one card' do
+        set = RuneterraCards::CardSet.new({ EPIC_CARD_1 => 1 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 0, 1, 0))
+      end
+
+      it 'sums two of the same card' do
+        set = RuneterraCards::CardSet.new({ EPIC_CARD_1 => 2 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 0, 2, 0))
+      end
+
+      it 'sums two different cards' do
+        set = RuneterraCards::CardSet.new({ EPIC_CARD_1 => 2, EPIC_CARD_2 => 3 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 0, 5, 0))
+      end
+    end
+
+    describe 'counts champion cards' do
+      it 'sums one card' do
+        set = RuneterraCards::CardSet.new({ CHAMPION_CARD_1 => 1 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 0, 0, 1))
+      end
+
+      it 'sums two of the same card' do
+        set = RuneterraCards::CardSet.new({ CHAMPION_CARD_1 => 2 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 0, 0, 2))
+      end
+
+      it 'sums two different cards' do
+        set = RuneterraCards::CardSet.new({ CHAMPION_CARD_1 => 2, CHAMPION_CARD_2 => 3 })
+        _(@m.cost_of(set)).must_equal(RuneterraCards::Cost.new(0, 0, 0, 5))
+      end
+    end
+  end
 end

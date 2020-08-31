@@ -57,5 +57,15 @@ module RuneterraCards
     def full_set
       CardSet.new(all_collectible.keys.each_with_object({}) { |code, result| result[code] = 3 })
     end
+
+    # @param [CardSet] card_set
+    # @return [Cost] the cost of crafting all the cards in the supplied CardSet
+    def cost_of(card_set)
+      rarity_and_count = card_set.cards.map { |card, count| [lookup_card(card).rarity, count] }
+      total = { common: 0, rare: 0, epic: 0, champion: 0 }
+      rarity_and_count.each { |(rarity, count)| total[rarity] += count }
+
+      Cost.new(total.fetch(:common), total.fetch(:rare), total.fetch(:epic), total.fetch(:champion))
+    end
   end
 end
