@@ -48,6 +48,38 @@ task :mutation_test_incremental do
   sh "bundle exec mutant --include lib --require 'runeterra_cards' --use minitest --since HEAD -- 'RuneterraCards*'"
 end
 
+task :check_versions_match do
+  found_gemfile_instructions = false
+  found_gemspec_instructions = false
+
+  Dir.glob('doc/**.md').each do |doc_file|
+    File.readlines(doc_file).select { |line| line.include?("gem 'runeterra_cards'") }.each do |gemline|
+      found_gemfile_instructions = true
+      next if gemline.include?("'~> #{RuneterraCards::VERSION}'")
+
+      abort <<~ERROR
+        gem line in #{doc_file} doesn't match library version
+        Expected: #{RuneterraCards::VERSION}
+        Actual: #{gemline}
+      ERROR
+    end
+
+    File.readlines(doc_file).select { |line| line.include?("add_dependency 'runeterra_cards'") }.each do |specline|
+      found_gemspec_instructions = true
+      next if specline.include?("'~> #{RuneterraCards::VERSION}'")
+
+      abort <<~ERROR
+        gemspec line in #{doc_file} doesn't match library version
+        Expected: #{RuneterraCards::VERSION}
+        Actual: #{specline}
+      ERROR
+    end
+  end
+
+  abort "Didn't find Gemfile instructions anywhere!" unless found_gemfile_instructions
+  abort "Didn't find gemspec instructions anywhere!" unless found_gemspec_instructions
+end
+
 RuboCop::RakeTask.new
 
 desc 'Run all checks (tests, full coverage, style checks)'
@@ -57,3 +89,5 @@ desc 'Run all fast checks (useful for development)'
 task quick_check: %i[test mutation_test_incremental rubocop]
 
 task default: :quick_check
+
+task build: %i[all_checks check_versions_match]
