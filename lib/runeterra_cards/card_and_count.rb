@@ -16,7 +16,7 @@ module RuneterraCards
     # @param faction_number [Fixnum]
     # @param card_number [Fixnum]
     # @param count [Fixnum]
-    def initialize(code: nil, count:, set: nil, faction_number: nil, card_number: nil)
+    def initialize(count:, code: nil, set: nil, faction_number: nil, card_number: nil)
       if code
         raise if set || faction_number || card_number
 

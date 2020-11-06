@@ -2,10 +2,8 @@
 
 require_relative 'test_helper'
 
-describe RuneterraCards do
-  cover 'RuneterraCards'
-  # Paste table from Github ( https://github.com/RiotGames/LoRDeckCodes ) here:
-  FACTION_TABLE = <<-TABLE
+# Paste table from Github ( https://github.com/RiotGames/LoRDeckCodes ) here:
+FACTION_TABLE = <<-TABLE
   0	DE	Demacia
   1	FR	Freljord
   2	IO	Ionia
@@ -14,9 +12,12 @@ describe RuneterraCards do
   5	SI	Shadow Isles
   6	BW	Bilgewater
   9	MT	Mount Targon
-  TABLE
+TABLE
 
-  FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [Integer(line[0], 10), line[1], line[2]]}.freeze
+FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [Integer(line[0], 10), line[1], line[2]]}.freeze
+
+describe RuneterraCards do
+  cover 'RuneterraCards'
 
   describe 'FACTION_IDENTIFIERS_FROM_INT' do
     FACTIONS.each do |integer_identifier, faction_identifier, faction_name|

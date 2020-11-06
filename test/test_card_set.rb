@@ -63,9 +63,11 @@ describe RuneterraCards::CardSet do
   end
 
   describe '#from_deck_code' do
-    describe 'when given invalid data' do
-      EMPTY_DECK = [0, 0, 0].pack('w*').freeze
+    let(:empty_deck) do
+      [0, 0, 0].pack('w*').freeze
+    end
 
+    describe 'when given invalid data' do
       describe 'invalid base32 encoding' do
         it 'returns a Base32Error' do
           _{RuneterraCards::CardSet.from_deck_code('ahsdkjahdjahds')}.must_raise RuneterraCards::Base32Error
@@ -91,7 +93,7 @@ describe RuneterraCards::CardSet do
       describe 'invalid version' do
         before do
           format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
-          bytes = [format_and_version].pack('C') + EMPTY_DECK
+          bytes = [format_and_version].pack('C') + empty_deck
           @code = Base32.encode(bytes)
         end
 
@@ -123,7 +125,7 @@ describe RuneterraCards::CardSet do
       describe 'invalid format' do
         it 'returns a StandardError' do
           format_and_version = (2 << 4) | (1 & 0xF) # format 2, version 1
-          bytes = [format_and_version].pack('C') + EMPTY_DECK
+          bytes = [format_and_version].pack('C') + empty_deck
           code = Base32.encode(bytes)
           _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise StandardError
           # TODO: change this to a more specific error
@@ -134,14 +136,14 @@ describe RuneterraCards::CardSet do
     describe 'valid versions' do
       it 'accepts version 1' do
         format_and_version = (1 << 4) | (1 & 0xF) # format 1, version 1
-        bytes = [format_and_version].pack('C') + EMPTY_DECK
+        bytes = [format_and_version].pack('C') + empty_deck
         code = Base32.encode(bytes)
         RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
       end
 
       it 'accepts version 2' do
         format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
-        bytes = [format_and_version].pack('C') + EMPTY_DECK
+        bytes = [format_and_version].pack('C') + empty_deck
         code = Base32.encode(bytes)
         RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
       end
