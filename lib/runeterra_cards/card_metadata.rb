@@ -26,6 +26,10 @@ module RuneterraCards
     # @return [String]
     attr_reader :card_code
 
+    # Returns the cost attribute. For example: 3.
+    # @return [Fixnum]
+    attr_reader :cost
+
     # Returns the card's rarity as a symbol. Can be one of: +:none+, +:common+, +:rare+, +:epic+, or +:champion+
     # @return [Symbol]
     attr_reader :rarity
@@ -38,12 +42,15 @@ module RuneterraCards
     # @option hash [String] name
     # @option hash [String] cardCode
     # @option hash [Boolean] collectible
+    # @option hash [Fixnum] cost
+    # @option hash [String] rarityRef
     #
     # @raise [MissingCardDataError] if any of the expected hash parameters are missing, or if +rarityRef+ contains an
     #   unexpected value.
     def initialize(hash)
       begin
-        @name, @card_code, @collectible, rarity_ref = hash.fetch_values('name', 'cardCode', 'collectible', 'rarityRef')
+        @name, @card_code, @collectible, @cost, rarity_ref =
+          hash.fetch_values('name', 'cardCode', 'collectible', 'cost', 'rarityRef')
       rescue KeyError => e
         raise MetadataLoadError.new(hash['name'] || hash['cardCode'], "Missing expected key: #{e.key}")
       end

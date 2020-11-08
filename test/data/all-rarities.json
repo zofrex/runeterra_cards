@@ -3,48 +3,56 @@
     "name": "Keeper of Masks",
     "cardCode": "01IO020",
     "collectible": true,
-    "rarityRef": "Common"
+    "rarityRef": "Common",
+    "cost":3
   },
   {
     "name": "Parade Electrorig",
     "cardCode": "01PZ007",
     "collectible": true,
-    "rarityRef": "Common"
+    "rarityRef": "Common",
+    "cost":3
   },
   {
     "name": "Mobilize",
     "cardCode": "01DE019",
     "collectible": true,
-    "rarityRef": "Rare"
+    "rarityRef": "Rare", 
+    "cost":3
   },
   {
     "name": "Culling Strike",
     "cardCode": "01NX004",
     "collectible": true,
-    "rarityRef": "Rare"
+    "rarityRef": "Rare",
+    "cost":3
   },
   {
     "name": "Dawnspeakers",
     "cardCode": "01DE031",
     "collectible": true,
-    "rarityRef": "Epic"
+    "rarityRef": "Epic",
+    "cost":3
   },
   {
     "name": "Augmented Experimenter",
     "cardCode": "01PZ013",
     "collectible": true,
-    "rarityRef": "Epic"
+    "rarityRef": "Epic",
+    "cost":3
   },
   {
     "name": "Lucian",
     "cardCode": "01DE022",
     "collectible": true,
-    "rarityRef": "Champion"
+    "rarityRef": "Champion",
+    "cost":3
   },
   {
     "name": "Heimerdinger",
     "cardCode": "01PZ056",
     "collectible": true,
-    "rarityRef": "Champion"
+    "rarityRef": "Champion",
+    "cost":3
   }
 ]
