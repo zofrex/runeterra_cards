@@ -2,6 +2,7 @@ name: Continuous Integration
 on: [push, pull_request]
 jobs:
   all-checks:
+    name: All checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -10,10 +11,13 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
       - name: "Debug: environment"
-        run:  ./.github/workflows/show-environment.sh
+        run: |
+          ruby --version
+          bundler --version
       - name: Run all checks (tests, coverage, linters)
         run: bundle exec rake all_checks
   unit-tests-matrix:
+    name: Unit tests matrix
     strategy:
       fail-fast: false
       matrix:
@@ -26,6 +30,8 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: "Debug: environment"
-        run: ./.github/workflows/show-environment.sh
+        run: |
+          ruby --version
+          bundler --version
       - name: Run tests
         run: bundle exec rake test
