@@ -6,7 +6,13 @@ describe RuneterraCards::CardMetadata do
   cover 'RuneterraCards::CardMetadata'
   describe 'contains data' do
     before do
-      @nautilus = { 'cardCode' => '01NX051', 'name' => 'Nautilus', 'collectible' => true, 'rarityRef' => 'Champion' }
+      @nautilus = {
+        'cardCode' => '01NX051',
+        'name' => 'Nautilus',
+        'collectible' => true,
+        'rarityRef' => 'Champion',
+        'cost' => 3,
+      }
     end
 
     it 'has a name' do
@@ -24,6 +30,11 @@ describe RuneterraCards::CardMetadata do
       _(card.rarity).must_equal(:champion)
     end
 
+    it 'has a cost' do
+      card = RuneterraCards::CardMetadata.new(@nautilus)
+      _(card.cost).must_equal(3)
+    end
+
     describe 'collectible? status' do
       it 'can be true' do
         card = RuneterraCards::CardMetadata.new(@nautilus)
@@ -39,7 +50,7 @@ describe RuneterraCards::CardMetadata do
 
   describe 'rarities' do
     before do
-      @data = { 'cardCode' => '01NX001', 'name' => 'Fictional Card', 'collectible' => true }
+      @data = { 'cardCode' => '01NX001', 'name' => 'Fictional Card', 'cost' => 3, 'collectible' => true }
     end
 
     it 'can be none' do
@@ -145,6 +156,26 @@ describe RuneterraCards::CardMetadata do
       end
     end
 
+    describe 'cost is missing' do
+      before do
+        @hash = { 'name' => 'House Spider', 'collectible' => true, 'cardCode' => '01NX055' }
+      end
+
+      it 'raises MissingCardDataError' do
+        _{RuneterraCards::CardMetadata.new(@hash)}.must_raise(RuneterraCards::MetadataLoadError)
+      end
+
+      it 'has the card name in the helpful error message' do
+        error = _{RuneterraCards::CardMetadata.new(@hash)}.must_raise(RuneterraCards::MetadataLoadError)
+        _(error.message).must_match(/.*House Spider.*missing.*key.*cost/i)
+      end
+
+      it 'has the card name in the error' do
+        err = _{RuneterraCards::CardMetadata.new(@hash)}.must_raise(RuneterraCards::MetadataLoadError)
+        _(err.card).must_equal('House Spider')
+      end
+    end
+
     describe 'collectible is missing' do
       before do
         @hash = { 'cardCode' => '01NX055', 'name' => 'House Spider' }
@@ -167,7 +198,7 @@ describe RuneterraCards::CardMetadata do
 
     describe 'rarityRef is missing' do
       before do
-        @hash = { 'cardCode' => '01NX055', 'name' => 'House Spider', 'collectible' => true }
+        @hash = { 'cardCode' => '01NX055', 'name' => 'House Spider', 'cost' => 3, 'collectible' => true }
       end
 
       it 'raises MissingCardDataError' do
