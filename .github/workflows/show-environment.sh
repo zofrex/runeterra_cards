@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "::warning Test warning message"
+echo "::warning::Test warning message"
 echo "Just regular output"
 
 echo "::group::My title"
