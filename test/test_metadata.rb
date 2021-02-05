@@ -58,12 +58,14 @@ describe RuneterraCards::Metadata do
       @m.add_set_file(set1)
       @m.add_set_file(set2)
       full_set = @m.full_set
-      _(full_set.cards).must_equal({
-                                     '01DE031' => 3,
-                                     '01DE022' => 3,
-                                     '02PZ001' => 3,
-                                     '02BW040' => 3,
-                                   })
+      _(full_set.cards).must_equal(
+        {
+          '01DE031' => 3,
+          '01DE022' => 3,
+          '02PZ001' => 3,
+          '02BW040' => 3,
+        }
+      )
     end
   end
 

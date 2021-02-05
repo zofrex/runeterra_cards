@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2021-02-05
+
+Fixed
+
+- Fixed issue where card numbers > 127 came out extremely wrong, e.g. Aphelios and several other of the new cards ([issue #4](https://github.com/zofrex/runeterra_cards/issues/4))
 ## [0.4.0] - 2020-12-08
 ### Added
 - [`CardMetadata` now has a `#cost` attribute representing the mana cost of a card.](https://github.com/zofrex/runeterra_cards/pull/3) (thanks, [nieszkah](https://github.com/alpm)!) Technically this is backwards-compatibility breaking as it makes a new field in metadata json mandatory.

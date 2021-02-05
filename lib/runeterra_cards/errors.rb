@@ -10,7 +10,8 @@ module RuneterraCards
   class Base32Error < DeckCodeParseError
     # Returns a new instance of Base32Error with a helpful error message preloaded.
     def initialize
-      super('Encountered an error while Base32 decoding deck code.' \
+      super(
+        'Encountered an error while Base32 decoding deck code.' \
         ' Probably an invalid deck code, or possibly a bug in the Base32 handling.')
     end
   end
@@ -37,8 +38,9 @@ module RuneterraCards
     # @param [Fixnum] expected The version number we were expecting to see in the deck code.
     # @param [Fixnum] got The version number we actually got.
     def initialize(expected, got)
-      super("Unrecognized deck code version number: #{got}, was expecting: #{expected}. \
-Possibly an invalid deck code, possibly you need to update the deck code library version.")
+      super(
+        "Unrecognized deck code version number: #{got}, was expecting: #{expected}. "\
+        'Possibly an invalid deck code, possibly you need to update the deck code library version.')
       @version = got
     end
   end
@@ -56,7 +58,8 @@ Possibly an invalid deck code, possibly you need to update the deck code library
 
     # @param [Fixnum] faction_number The faction number we encountered and did not recognise.
     def initialize(faction_number)
-      super("Unrecognized faction number '#{faction_number}'."\
+      super(
+        "Unrecognized faction number '#{faction_number}'."\
         ' Possibly you need to update this library to a newer version')
       @faction_number = faction_number
     end

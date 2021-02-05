@@ -62,8 +62,9 @@ module RuneterraCards
 
       raise unless format.equal? 1
 
-      int_array = binary_data[1..].unpack('w*')
+      int_array = unpack_uleb128(binary_data[1..])
       cards = assemble_card_list(int_array)
+
       from_card_and_counts(cards)
     end
 
@@ -108,5 +109,19 @@ module RuneterraCards
     end
 
     private_class_method :assemble_card_list
+
+    # @param [String] binary
+    # @return [Enumerable<Fixnum>]
+    def self.unpack_uleb128(binary)
+      binary.each_byte.slice_after { |b| (b & 0b1000_0000).zero? }.map do |int_bytes|
+        acc = 0
+        int_bytes.each_with_index do |byte, index|
+          acc += (byte & 0b0111_1111) << (7 * index)
+        end
+        acc
+      end
+    end
+
+    private_class_method :unpack_uleb128
   end
 end
