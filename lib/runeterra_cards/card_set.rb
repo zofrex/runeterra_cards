@@ -11,17 +11,12 @@ module RuneterraCards
     HIGH_BIT = 0b1000_0000
     private_constant :HIGH_BIT
 
-    # @return [Hash<String,Fixnum>]
+    # @return [Hash{String => Number}]
     attr_reader :cards
 
-    # @param [Hash<String,Fixnum>] cards A Hash of card codes mapping to card counts
+    # @param [Hash{String => Number},Enumerable{String => Number}] cards A Hash of card codes mapping to card counts
     def initialize(cards)
       @cards = cards
-    end
-
-    # @deprecated
-    def self.from_card_and_counts(set)
-      new(set.map { |cac| [cac.code, cac.count] }.to_h)
     end
 
     # Subtract another {CardSet CardSet} from this one. Items with count 0 are not represented in the returned
@@ -38,7 +33,7 @@ module RuneterraCards
       CardSet.new(remaining_cards)
     end
 
-    # @return [Enumerator<CardAndCount>]
+    # @return [Enumerable<CardAndCount>]
     # @deprecated
     def as_card_and_counts
       cards.map { |code, count| CardAndCount.new(code: code, count: count) }
@@ -46,7 +41,7 @@ module RuneterraCards
 
     # Returns how many of the given card are in this CardSet.
     # @param [String] code Card code, e.g. "01DE031"
-    # @return [Fixnum] How many of the card are in this CardSet, or 0 if it isn't present.
+    # @return [Integer] How many of the card are in this CardSet, or 0 if it isn't present.
     def count_for_card_code(code)
       cards[code] || 0
     end
@@ -69,7 +64,7 @@ module RuneterraCards
       int_array = unpack_big_endian_varint(binary_data[1..])
       cards = assemble_card_list(int_array)
 
-      from_card_and_counts(cards)
+      new(cards.to_h)
     end
 
     # @param string [String] base32-encoded string
@@ -106,7 +101,8 @@ module RuneterraCards
           number_of_cards, set, faction = array.shift(3)
 
           array.shift(number_of_cards).map do |card_number|
-            CardAndCount.new(set: set, faction_number: faction, card_number: card_number, count: number_of_copies)
+            cac = CardAndCount.new(set: set, faction_number: faction, card_number: card_number, count: number_of_copies)
+            [cac.code, cac.count]
           end
         end
       end
