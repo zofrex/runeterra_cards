@@ -7,6 +7,10 @@ module RuneterraCards
   #
   # @todo The API to this class is very unstable and will change a lot in a coming release.
   class CardSet
+    # Extract this bitmask so Mutant can't see it, until this fix is released https://github.com/mbj/mutant/pull/1218
+    HIGH_BIT = 0b1000_0000
+    private_constant :HIGH_BIT
+
     # @return [Hash<String,Fixnum>]
     attr_reader :cards
 
@@ -113,7 +117,7 @@ module RuneterraCards
     # @param [String] binary
     # @return [Enumerable<Fixnum>]
     def self.unpack_uleb128(binary)
-      binary.each_byte.slice_after { |b| (b & 0b1000_0000).zero? }.map do |int_bytes|
+      binary.each_byte.slice_after { |b| (b & HIGH_BIT).zero? }.map do |int_bytes|
         acc = 0
         int_bytes.each_with_index do |byte, index|
           acc += (byte & 0b0111_1111) << (7 * index)
