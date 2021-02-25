@@ -66,7 +66,7 @@ module RuneterraCards
 
       raise unless format.equal? 1
 
-      int_array = unpack_uleb128(binary_data[1..])
+      int_array = unpack_big_endian_varint(binary_data[1..])
       cards = assemble_card_list(int_array)
 
       from_card_and_counts(cards)
@@ -116,7 +116,7 @@ module RuneterraCards
 
     # @param [String] binary
     # @return [Enumerable<Fixnum>]
-    def self.unpack_uleb128(binary)
+    def self.unpack_big_endian_varint(binary)
       binary.each_byte.slice_after { |b| (b & HIGH_BIT).zero? }.map do |int_bytes|
         acc = 0
         int_bytes.each_with_index do |byte, index|
@@ -126,6 +126,6 @@ module RuneterraCards
       end
     end
 
-    private_class_method :unpack_uleb128
+    private_class_method :unpack_big_endian_varint
   end
 end
