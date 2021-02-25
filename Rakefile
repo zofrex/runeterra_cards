@@ -54,7 +54,7 @@ task :check_versions_match do
   found_gemfile_instructions = false
   found_gemspec_instructions = false
 
-  Dir.glob('doc/**.md').each do |doc_file|
+  Dir['doc/**.md', 'README.md'].each do |doc_file|
     File.open(doc_file, 'r').each_line.select { |line| line.include?("gem 'runeterra_cards'") }.each do |gemline|
       found_gemfile_instructions = true
       next if gemline.include?("'~> #{RuneterraCards::VERSION}'")
