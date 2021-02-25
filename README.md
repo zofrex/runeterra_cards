@@ -4,6 +4,8 @@
 
 This library makes it easy to decode Legends of Runeterra deck codes, load Data Dragon metadata for cards, and perform operations on the data.
 
+Deck code decoding is based on [the specification documented by Riot Games](https://github.com/RiotGames/LoRDeckCodes). Metadata loading is designed to work with the metadata from [Legends of Runeterra Data Dragon](https://developer.riotgames.com/docs/lor#data-dragon).
+
 ## Documentation
 
 [Full API documentation including examples is available on Rubydoc](https://www.rubydoc.info/gems/runeterra_cards). It is recommended to read it there rather than reading the docs on Github.
