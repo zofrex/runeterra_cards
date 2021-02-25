@@ -15,6 +15,7 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/test_*.rb']
 end
 
+desc 'Enable all pending Rubocop cops'
 task :add_pending_cops do
   # Only require this if we need it, it takes a while
   require 'rubocop'

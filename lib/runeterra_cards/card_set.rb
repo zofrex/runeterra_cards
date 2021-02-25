@@ -21,7 +21,7 @@ module RuneterraCards
 
     # @deprecated
     def self.from_card_and_counts(set)
-      new(Hash[set.map { |cac| [cac.code, cac.count] }])
+      new(set.map { |cac| [cac.code, cac.count] }.to_h)
     end
 
     # Subtract another {CardSet CardSet} from this one. Items with count 0 are not represented in the returned
