@@ -33,10 +33,10 @@ module RuneterraCards
       CardSet.new(remaining_cards)
     end
 
-    # @return [Enumerable<CardAndCount>]
+    # @return [Enumerable<Card => Number>]
     # @deprecated
-    def as_card_and_counts
-      cards.map { |code, count| CardAndCount.new(code: code, count: count) }
+    def as_cards
+      cards.transform_keys { |code| Card.new(code: code) }
     end
 
     # Returns how many of the given card are in this CardSet.
@@ -93,7 +93,7 @@ module RuneterraCards
     private_class_method :decode_format_and_version
 
     # @param [Array<Fixnum>] array
-    # @return [Array<CardAndCount>]
+    # @return [Array<Card>]
     def self.assemble_card_list(array)
       3.downto(1).flat_map do |number_of_copies|
         set_faction_combination_count = array.shift
@@ -101,8 +101,8 @@ module RuneterraCards
           number_of_cards, set, faction = array.shift(3)
 
           array.shift(number_of_cards).map do |card_number|
-            cac = CardAndCount.new(set: set, faction_number: faction, card_number: card_number, count: number_of_copies)
-            [cac.code, cac.count]
+            cac = Card.new(set: set, faction_number: faction, card_number: card_number)
+            [cac.code, number_of_copies]
           end
         end
       end

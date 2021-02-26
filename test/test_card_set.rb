@@ -11,20 +11,26 @@ describe RuneterraCards::CardSet do
   describe 'creation and contents' do
     it 'can be empty' do
       card_set = RuneterraCards::CardSet.new({})
-      _(card_set.as_card_and_counts.to_set).must_be_empty
+      _(card_set.as_cards).must_be_empty
     end
 
     it 'can contain a card' do
-      card = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
-      card_set = RuneterraCards::CardSet.new({ card.code => card.count })
-      _(card_set.as_card_and_counts.to_set).must_include(card)
+      card = RuneterraCards::Card.new(set: 1, faction_number: 0, card_number: 0)
+      card_set = RuneterraCards::CardSet.new({ card.code => 1 })
+      _(card_set.as_cards).must_include(card)
+    end
+
+    it 'has a count for the card' do
+      card = RuneterraCards::Card.new(set: 1, faction_number: 0, card_number: 0)
+      card_set = RuneterraCards::CardSet.new({ card.code => 3 })
+      _(card_set.as_cards[card]).must_equal(3)
     end
 
     it 'can contain multiple cards' do
-      card1 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 0, card_number: 0, count: 2)
-      card2 = RuneterraCards::CardAndCount.new(set: 1, faction_number: 1, card_number: 7, count: 3)
-      card_set = RuneterraCards::CardSet.new({ card1.code => card1.count, card2.code => card2.count })
-      _(card_set.as_card_and_counts.to_set).must_equal(Set[card1, card2])
+      card1 = RuneterraCards::Card.new(set: 1, faction_number: 0, card_number: 0)
+      card2 = RuneterraCards::Card.new(set: 1, faction_number: 1, card_number: 7)
+      card_set = RuneterraCards::CardSet.new({ card1.code => 2, card2.code => 3 })
+      _(card_set.as_cards).must_equal({ card1 => 2, card2 => 3 })
     end
   end
 
@@ -163,7 +169,7 @@ describe RuneterraCards::CardSet do
         cards = [0, 0, 0].pack('C*')
         code = Base32.encode(@fav_bytes + cards)
         card_set = RuneterraCards::CardSet.from_deck_code(code)
-        _(card_set.as_card_and_counts.to_set).must_equal Set.new
+        _(card_set.as_cards).must_equal({})
       end
 
       it 'handles a single card in the 3x section' do
@@ -180,8 +186,8 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 3)]
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+        expected = { RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 17) => 3 }
+        _(card_set.as_cards).must_equal expected
       end
 
       it 'handles a single card in the 2x section' do
@@ -198,8 +204,8 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 2)]
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+        expected = { RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 17) => 2 }
+        _(card_set.as_cards).must_equal expected
       end
 
       it 'handles a single card in the 1x section' do
@@ -216,8 +222,8 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1)]
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+        expected = { RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 17) => 1 }
+        _(card_set.as_cards).must_equal expected
       end
 
       describe 'creates a card with the right set number' do
@@ -234,7 +240,7 @@ describe RuneterraCards::CardSet do
             code = Base32.encode(@fav_bytes + cards)
 
             card_set = RuneterraCards::CardSet.from_deck_code(code)
-            card = card_set.as_card_and_counts.to_set.first
+            card = card_set.as_cards.keys.first
 
             _(card.code).must_match(/^0#{set_number}/)
           end
@@ -255,7 +261,7 @@ describe RuneterraCards::CardSet do
             code = Base32.encode(@fav_bytes + cards)
 
             card_set = RuneterraCards::CardSet.from_deck_code(code)
-            card = card_set.as_card_and_counts.to_set.first
+            card = card_set.as_cards.keys.first
 
             _(card.code).must_match(/#{faction_identifier}/)
           end
@@ -277,7 +283,7 @@ describe RuneterraCards::CardSet do
             code = Base32.encode(@fav_bytes + cards)
 
             card_set = RuneterraCards::CardSet.from_deck_code(code)
-            card = card_set.as_card_and_counts.to_set.first
+            card = card_set.as_cards.keys.first
 
             _(card.code).must_match(/0#{card_number}$/)
           end
@@ -302,11 +308,11 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[
-          RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1),
-          RuneterraCards::CardAndCount.new(set: 1, faction_number: 4, card_number: 16, count: 1),
-        ]
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+        expected = {
+          RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 17) => 1,
+          RuneterraCards::Card.new(set: 1, faction_number: 4, card_number: 16) => 1,
+        }
+        _(card_set.as_cards).must_equal expected
       end
 
       it 'handles multiple cards in a single set/faction list' do
@@ -324,14 +330,14 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[
-            RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 17, count: 1),
-            RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 18, count: 1),
-        ]
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+        expected = {
+          RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 17) => 1,
+          RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 18) => 1,
+        }
+        _(card_set.as_cards).must_equal expected
       end
 
-      it 'can return data as a hash' do
+      it 'can return data as a hash of card codes to counts' do
         cards = [0, 0, 1, 2, 1, 3, 17, 18].pack('C*')
         #        ^  ^  ^  ^  ^  ^  ^   ^
         #        │  │  │  │  │  │  │   └ card #
@@ -367,8 +373,8 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set[RuneterraCards::CardAndCount.new(set: 1, faction_number: 3, card_number: 128, count: 1)]
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+        expected = { RuneterraCards::Card.new(set: 1, faction_number: 3, card_number: 128) => 1 }
+        _(card_set.as_cards).must_equal expected
       end
 
       it 'handles set/faction lists > 127 in length' do
@@ -389,12 +395,12 @@ describe RuneterraCards::CardSet do
 
         card_set = RuneterraCards::CardSet.from_deck_code(code)
 
-        expected = Set.new(
+        expected =
           (0..127).map do |card_number|
-            RuneterraCards::CardAndCount.new(set: 1, faction_number: 1, card_number: card_number, count: 1)
+            [RuneterraCards::Card.new(set: 1, faction_number: 1, card_number: card_number), 1]
           end
-        )
-        _(card_set.as_card_and_counts.to_set).must_equal expected
+
+        _(card_set.as_cards).must_equal expected.to_h
       end
     end
   end
