@@ -12,6 +12,7 @@ module RuneterraCards
     private_constant :HIGH_BIT
 
     # @return [Hash{String => Number}]
+    # @deprecated
     attr_reader :cards
 
     # @param [Hash{String => Number},Enumerable{String => Number}] cards A Hash of card codes mapping to card counts
@@ -37,6 +38,14 @@ module RuneterraCards
     # @deprecated
     def as_cards
       cards.transform_keys { |code| Card.new(code: code) }
+    end
+
+    # Return all cards in the card set as a map of card codes to counts.
+    # @example
+    #   set.as_card_codes #=> { '01DE044' => 1, '02NX003' => 2 }
+    # @return [Enumerable<String => Number>]
+    def as_card_codes
+      cards
     end
 
     # Returns how many of the given card are in this CardSet.

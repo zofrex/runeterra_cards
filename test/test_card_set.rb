@@ -66,6 +66,21 @@ describe RuneterraCards::CardSet do
     end
   end
 
+  it 'returns {Card => count} from #as_cards' do
+    card_set = RuneterraCards::CardSet.new({ '01DE044' => 1, '02NX003' => 2 })
+    _(card_set.as_cards.to_h).must_equal(
+      {
+        RuneterraCards::Card.new(code: '01DE044') => 1,
+        RuneterraCards::Card.new(code: '02NX003') => 2,
+      }
+    )
+  end
+
+  it 'returns {String => count} from #as_card_codes' do
+    card_set = RuneterraCards::CardSet.new({ '01DE044' => 1, '02NX003' => 2 })
+    _(card_set.as_card_codes.to_h).must_equal({ '01DE044' => 1, '02NX003' => 2 })
+  end
+
   describe '#from_deck_code' do
     let(:empty_deck) do
       [0, 0, 0].pack('C*').freeze

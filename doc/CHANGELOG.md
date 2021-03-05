@@ -4,9 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.4.1] - 2021-02-05
+## [0.5.0] - 2021-03-05
+### Added
+- Support for the Shurima faction
+- Support for version 3 deck codes
+- A new Card class to represent cards on their own without a count
+- CardSet#as_cards, which returns all the cards in the set as Cards.
+- CardSet#as_card_codes, which returns all the cards in the set as card codes.
 
-Fixed
+### Removed
+- RuneterraCards.from_card_and_counts method
+- CardAndCount class (replaced by the new Card class)
+- CardSet#as_card_and_counts (replaced by #as_cards)
+
+### Deprecated
+- CardSet#cards – the signature of this method will be changing in a future version to match #as_cards, migrate to #as_card_codes to keep the current #cards behaviour.
+
+## [0.4.1] - 2021-02-05
+### Fixed
 
 - Fixed issue where card numbers > 127 came out extremely wrong, e.g. Aphelios and several other of the new cards ([issue #4](https://github.com/zofrex/runeterra_cards/issues/4))
 ## [0.4.0] - 2020-12-08
