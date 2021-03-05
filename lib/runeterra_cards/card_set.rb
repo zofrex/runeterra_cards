@@ -35,7 +35,6 @@ module RuneterraCards
     end
 
     # @return [Enumerable<Card => Number>]
-    # @deprecated
     def as_cards
       cards.transform_keys { |code| Card.new(code: code) }
     end
