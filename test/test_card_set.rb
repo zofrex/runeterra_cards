@@ -96,7 +96,7 @@ describe RuneterraCards::CardSet do
 
       describe 'invalid version' do
         before do
-          format_and_version = (1 << 4) | (3 & 0xF) # format 1, version 3
+          format_and_version = (1 << 4) | (13 & 0xF) # format 1, version 13
           bytes = [format_and_version].pack('C') + empty_deck
           @code = Base32.encode(bytes)
         end
@@ -112,17 +112,17 @@ describe RuneterraCards::CardSet do
 
         it 'includes the version we got in the error message' do
           err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
-          _(err.message).must_match(/Unrecognized deck code version number: 3/)
+          _(err.message).must_match(/Unrecognized deck code version number: 13/)
         end
 
         it 'includes the expected version in the error message' do
           err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
-          _(err.message).must_match(/was expecting: 2/)
+          _(err.message).must_match(/was expecting: 3/)
         end
 
         it 'includes the version we got in the error object' do
           err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
-          _(err.version).must_equal(3)
+          _(err.version).must_equal(13)
         end
       end
 
@@ -138,18 +138,20 @@ describe RuneterraCards::CardSet do
     end
 
     describe 'valid versions' do
-      it 'accepts version 1' do
-        format_and_version = (1 << 4) | (1 & 0xF) # format 1, version 1
-        bytes = [format_and_version].pack('C') + empty_deck
-        code = Base32.encode(bytes)
-        RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
+      [1, 2, 3].each do |version|
+        it "accepts version #{version}" do
+          format_and_version = (1 << 4) | (version & 0xF) # format 1, version x
+          bytes = [format_and_version].pack('C') + empty_deck
+          code = Base32.encode(bytes)
+          RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
+        end
       end
 
-      it 'accepts version 2' do
-        format_and_version = (1 << 4) | (2 & 0xF) # format 1, version 2
+      it "doesn't accept version 4" do
+        format_and_version = (1 << 4) | (4 & 0xF) # format 1, version 4
         bytes = [format_and_version].pack('C') + empty_deck
         code = Base32.encode(bytes)
-        RuneterraCards::CardSet.from_deck_code(code) # won't raise an exception
+        _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise
       end
     end
 

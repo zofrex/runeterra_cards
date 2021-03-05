@@ -16,6 +16,6 @@ require 'runeterra_cards/cost'
 # You might also want to check out the {file:doc/README.md} and the {file:doc/CHANGELOG.md}.
 module RuneterraCards
   # The version of deck encoding supported
-  SUPPORTED_VERSION = 2
+  SUPPORTED_VERSION = 3
   public_constant :SUPPORTED_VERSION
 end
