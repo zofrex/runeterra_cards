@@ -28,20 +28,20 @@ describe RuneterraCards::Card do
 
     describe 'unknown faction number' do
       it 'gives a good error' do
-        _{RuneterraCards::Card.new(set: 1, faction_number: 7, card_number: 1)}
+        _{RuneterraCards::Card.new(set: 1, faction_number: 37, card_number: 1)}
           .must_raise(RuneterraCards::UnrecognizedFactionError)
       end
 
       it 'gives a helpful error message' do
-        e = _{RuneterraCards::Card.new(set: 1, faction_number: 7, card_number: 1)}
+        e = _{RuneterraCards::Card.new(set: 1, faction_number: 37, card_number: 1)}
             .must_raise(RuneterraCards::UnrecognizedFactionError)
-        _(e.message).must_match(/unrecognized faction.*'7'\..*update.*library/i)
+        _(e.message).must_match(/unrecognized faction.*'37'\..*update.*library/i)
       end
 
       it 'includes the faction number in the error' do
-        e = _{RuneterraCards::Card.new(set: 1, faction_number: 7, card_number: 1)}
+        e = _{RuneterraCards::Card.new(set: 1, faction_number: 37, card_number: 1)}
             .must_raise(RuneterraCards::UnrecognizedFactionError)
-        _(e.faction_number).must_equal(7)
+        _(e.faction_number).must_equal(37)
       end
     end
   end

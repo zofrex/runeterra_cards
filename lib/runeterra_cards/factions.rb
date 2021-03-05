@@ -13,6 +13,7 @@ module RuneterraCards
     4 => 'PZ',
     5 => 'SI',
     6 => 'BW',
+    7 => 'SH',
     9 => 'MT',
   }.freeze
   public_constant :FACTION_IDENTIFIERS_FROM_INT
@@ -29,6 +30,7 @@ module RuneterraCards
     'PZ' => 4,
     'SI' => 5,
     'BW' => 6,
+    'SH' => 7,
     'MT' => 9,
   }.freeze
   public_constant :FACTION_INTS_FROM_IDENTIFIER

@@ -53,4 +53,13 @@ describe RuneterraCards::CardSet do
 
     _(deck.as_cards).must_equal expected
   end
+
+  # MFrom a rando online deck - https://lor.mobalytics.gg/decks/c0vsfp4b5t283avdiq5g
+  it 'can load Shurima cards' do
+    deck_code = 'CEBQKBAHAEGRUSKZAQCACAIFAYHAEAIBCQZACAYEA4PUY6IBAECAOOY'
+
+    deck = RuneterraCards::CardSet.from_deck_code(deck_code) # doesn't throw exception
+
+    _(deck.count_for_card_code('04SH073')).must_equal 3
+  end
 end

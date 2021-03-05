@@ -28,10 +28,10 @@ Style/TrailingCommaInHashLiteral:
 # because _{foo} is common there and matches _(foo), _ { foo } looks weird because it doesn't match _(foo)
 Layout/SpaceInsideBlockBraces:
   Exclude:
-    - 'test/**'
+    - 'test/**/*'
 Layout/SpaceBeforeBlockBraces:
   Exclude:
-    - 'test/**'
+    - 'test/**/*'
 
 # Not a relevant metric for tests, where we organise tests by block and those blocks get pretty large
 # Also not relevant for gemspec
