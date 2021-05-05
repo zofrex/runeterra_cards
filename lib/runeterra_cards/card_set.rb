@@ -6,6 +6,7 @@ module RuneterraCards
   # Represents a collection of cards.
   #
   # @todo The API to this class is very unstable and will change a lot in a coming release.
+  # @todo add #== !
   class CardSet
     # Extract this bitmask so Mutant can't see it, until this fix is released https://github.com/mbj/mutant/pull/1218
     HIGH_BIT = 0b1000_0000

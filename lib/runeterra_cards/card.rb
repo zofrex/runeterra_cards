@@ -2,7 +2,7 @@
 
 module RuneterraCards
   # Represents a card
-  # @deprecated
+  # @TODO: getters for set, faction, card number
   class Card
     # The card code, for example "01DE123"
     # @return [String]

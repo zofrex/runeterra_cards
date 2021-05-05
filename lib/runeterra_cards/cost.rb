@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# @todo could be more obvious what's wrong when you call == on the wrong class e.g. a number
 module RuneterraCards
   # Represents the cost of a {CardSet}, as wildcards or shards.
   # To get the cost of a {CardSet} you need to call {Metadata#cost_of}, as rarity (and therefore cost) is a property

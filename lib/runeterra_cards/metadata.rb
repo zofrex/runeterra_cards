@@ -33,7 +33,7 @@ module RuneterraCards
       data = JSON.parse(file)
       data.each do |card_data|
         card = CardMetadata.new(card_data)
-        @cards[card.card_code] = card
+        @cards[card.card_code] = card # TODO: warn or error if there are duplicate card codes!
       end
     end
 
