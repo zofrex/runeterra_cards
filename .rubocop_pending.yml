@@ -164,3 +164,39 @@ Performance/ConstantRegexp:
 
 Performance/MethodObjectAsBlock:
   Enabled: true
+
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: true
+
+Lint/AmbiguousRange:
+  Enabled: true
+
+Lint/EmptyInPattern:
+  Enabled: true
+
+Naming/InclusiveLanguage:
+  Enabled: true
+
+Style/InPatternThen:
+  Enabled: true
+
+Style/MultilineInPatternThen:
+  Enabled: true
+
+Style/QuotedSymbols:
+  Enabled: true
+
+Style/RedundantSelfAssignmentBranch:
+  Enabled: true
+
+Style/StringChars:
+  Enabled: true
+
+Performance/MapCompact:
+  Enabled: true
+
+Performance/RedundantEqualityComparisonBlock:
+  Enabled: true
+
+Performance/RedundantSplitRegexpArgument:
+  Enabled: true

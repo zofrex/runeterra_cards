@@ -109,6 +109,7 @@ task all_checks: %i[test coverage mutation_test rubocop verify_docs]
 desc 'Run all fast checks (useful for development)'
 task quick_check: %i[test mutation_test_incremental rubocop]
 
+desc 'Check that documented versions match version and changelog is updated'
 task check_docs_for_release: %i[check_versions_match check_changelog]
 task default: :quick_check
 

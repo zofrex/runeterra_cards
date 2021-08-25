@@ -4,18 +4,19 @@ require_relative 'test_helper'
 
 # Paste table from Github ( https://github.com/RiotGames/LoRDeckCodes ) here:
 FACTION_TABLE = <<-TABLE
-  0	DE	Demacia	1
-  1	FR	Freljord	1
-  2	IO	Ionia	1
-  3	NX	Noxus	1
-  4	PZ	Piltover & Zaun	1
-  5	SI	Shadow Isles	1
-  6	BW	Bilgewater	2
-  7	SH	Shurima	3
-  9	MT	Mount Targon	2**
+  1	0	DE	Demacia
+  1	1	FR	Freljord
+  1	2	IO	Ionia
+  1	3	NX	Noxus
+  1	4	PZ	Piltover & Zaun
+  1	5	SI	Shadow Isles
+  2	6	BW	Bilgewater
+  2	9	MT	Mount Targon
+  3	7	SH	Shurima
+  4	10	BC	Bandle City
 TABLE
 
-FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [Integer(line[0], 10), line[1], line[2]]}.freeze
+FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [Integer(line[1], 10), line[2], line[3]]}.freeze
 
 describe RuneterraCards do
   cover 'RuneterraCards'

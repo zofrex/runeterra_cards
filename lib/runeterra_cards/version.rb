@@ -2,6 +2,6 @@
 
 module RuneterraCards
   # The version of this library
-  VERSION = '0.5.0'
+  VERSION = '0.6.0'
   public_constant :VERSION
 end

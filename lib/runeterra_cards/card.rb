@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module RuneterraCards
-  # Represents a card
-  # @TODO: getters for set, faction, card number
+  # Represents a card.
+  #
+  # @todo: add getters for set, faction, card number
   class Card
     # The card code, for example "01DE123"
     # @return [String]
@@ -24,12 +25,19 @@ module RuneterraCards
       end
     end
 
-    #:nodoc:
+    # Returns +true+ if _this_ and _other_ both have the same card code.
+    #
+    # @param other [Card]
+    # @return [Boolean]
     def eql?(other)
       code.eql?(other.code)
     end
 
-    #:nodoc:
+    # Compute a hash code for this card. Two cards with the same card code will have the same hash code (and will
+    # compare using {#eql?}).
+    #
+    # @see Object#hash.
+    # @return [Integer]
     def hash
       code.hash
     end

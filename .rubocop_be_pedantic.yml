@@ -80,10 +80,11 @@ Style/DocumentationMethod:
 Style/ImplicitRuntimeError:
   Enabled: true
 
-Style/InlineComment:
-  Enabled: true
-  Exclude:
-    - 'test/**'
+## Annoying and don't see any justification
+#Style/InlineComment:
+#  Enabled: true
+#  Exclude:
+#    - 'test/**'
 
 Style/IpAddresses:
   Enabled: true

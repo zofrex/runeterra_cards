@@ -54,12 +54,21 @@ describe RuneterraCards::CardSet do
     _(deck.as_cards).must_equal expected
   end
 
-  # MFrom a rando online deck - https://lor.mobalytics.gg/decks/c0vsfp4b5t283avdiq5g
+  # From a rando online deck - https://lor.mobalytics.gg/decks/c0vsfp4b5t283avdiq5g
   it 'can load Shurima cards' do
     deck_code = 'CEBQKBAHAEGRUSKZAQCACAIFAYHAEAIBCQZACAYEA4PUY6IBAECAOOY'
 
     deck = RuneterraCards::CardSet.from_deck_code(deck_code) # doesn't throw exception
 
     _(deck.count_for_card_code('04SH073')).must_equal 3
+  end
+
+  # Made a deck containing one bandle card
+  it 'can load Bandle City decks' do
+    deck_code = 'CQAAAAIBAUFKAAI'
+
+    deck = RuneterraCards::CardSet.from_deck_code(deck_code) # doesn't throw exception
+
+    _(deck.count_for_card_code('05BC160')).must_equal 1
   end
 end
