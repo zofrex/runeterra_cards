@@ -10,3 +10,10 @@ source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
     gem 'mutant-license'
   end
 end
+
+group :documentation do
+  # Used to generate API docs
+  gem 'yard'
+  # Used for getting good markdown in Yard docs
+  gem 'redcarpet'
+end
