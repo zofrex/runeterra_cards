@@ -11,6 +11,11 @@ jobs:
       matrix:
         ruby: ["3.0", "2.7", "2.6", "head", "jruby-9.3", "jruby-head", "truffleruby-19", "truffleruby-20", "truffleruby-21", "truffleruby-head"]
         os: [ubuntu-latest, windows-latest]
+        bundler: default
+        include:
+          - os: ubuntu-latest
+            ruby: truffleruby-19
+            bundler: 1
         exclude:
           - os: windows-latest
             ruby: truffleruby-19
@@ -26,6 +31,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          bundler: ${{ matrix.bundler }}
       - name: "Debug: environment"
         run: |
           ruby --version
