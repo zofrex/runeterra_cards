@@ -43,13 +43,13 @@ end
 desc 'Thorough code coverage checking via mutation testing (semantic coverage checking)'
 task :mutation_test do
   sh "LOAD_MUTANT=1 bundle exec mutant run --include lib --require 'runeterra_cards' --use minitest" \
-    " -- 'RuneterraCards*'"
+     " -- 'RuneterraCards*'"
 end
 
 desc 'Incremental mutation testing (tests everything that has changed since the most recent commit)'
 task :mutation_test_incremental do
   sh "LOAD_MUTANT=1 bundle exec mutant run --include lib --require 'runeterra_cards' --use minitest --since HEAD" \
-    " -- 'RuneterraCards*'"
+     " -- 'RuneterraCards*'"
 end
 
 task :check_versions_match do
