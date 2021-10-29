@@ -4,10 +4,12 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :development do
-  source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
-    # Required to license the `mutant` gem
-    gem 'mutant-license'
+unless ENV['SKIP_MUTANT_LICENSE']
+  group :development do
+    source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
+      # Required to license the `mutant` gem
+      gem 'mutant-license'
+    end
   end
 end
 

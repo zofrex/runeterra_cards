@@ -19,6 +19,8 @@ jobs:
           - os: windows-latest
             ruby: truffleruby-head
     runs-on: ${{ matrix.os }}
+    env:
+      SKIP_MUTANT_LICENSE: 1
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
