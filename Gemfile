@@ -4,16 +4,21 @@ source 'https://rubygems.org'
 
 gemspec
 
-source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
-  group :development do
+# Seperate out gems we don't need to run unit tests
+# This:
+#  * makes unit tests run faster by skipping installing these gems
+#  * helps avoid issue where 'redcarpet' fails to install under JRuby
+group :development do
+  source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
     # Required to license the `mutant` gem
     gem 'mutant-license'
   end
-end
 
-# Put redcarpet in a group so we can skip installing it in the unit test configuration
-# Needed because it won't install under JRuby
-group :redcarpet do
-  # Used for getting good markdown in Yard docs
+  gem 'deep-cover'
+  gem 'mutant'
+  gem 'mutant-minitest'
   gem 'redcarpet'
+  gem 'rubocop'
+  gem 'rubocop-minitest'
+  gem 'rubocop-performance'
 end

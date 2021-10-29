@@ -1,7 +1,8 @@
 # Enable, or try enabling, every single cop and see what happens:
 
-Bundler/GemComment:
-  Enabled: true
+## Not useful in a Gem, where the primary record of gems is the gemspec
+#Bundler/GemComment:
+#  Enabled: true
 
 Layout/ClassStructure:
   Enabled: true
