@@ -19,4 +19,5 @@ group :test do
   gem 'minitest-reporters'
   gem 'rake'
   gem 'yard'
+  gem 'rubocop'
 end
