@@ -18,6 +18,6 @@ group :test do
   gem 'minitest'
   gem 'minitest-reporters'
   gem 'rake'
-  gem 'yard'
   gem 'rubocop'
+  gem 'yard'
 end
