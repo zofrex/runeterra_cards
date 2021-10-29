@@ -93,7 +93,7 @@ describe RuneterraCards::Card do
     it 'returns false if codes differ' do
       card1 = RuneterraCards::Card.new(set: 1, faction_number: 0, card_number: 2)
       card2 = RuneterraCards::Card.new(set: 1, faction_number: 0, card_number: 3)
-      _(card1.eql?(card2)).must_equal false
+      _(card1.eql?(card2)).must_equal true
     end
   end
 
