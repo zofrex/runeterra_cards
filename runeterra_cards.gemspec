@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.files         = Dir['lib/**/*', 'LICENSE.txt', 'doc/**/*', '.yardopts']
 
   s.add_dependency 'base32', '~> 0.3.2'
-  s.add_development_dependency 'bundler', '~> 2.0'
   s.add_development_dependency 'deep-cover', '~> 0.7'
   s.add_development_dependency 'minitest', '~> 5.14'
   s.add_development_dependency 'minitest-reporters', '~> 1.4.2'
