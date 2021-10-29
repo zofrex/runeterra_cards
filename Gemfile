@@ -11,9 +11,9 @@ source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
   end
 end
 
-group :documentation do
-  # Used to generate API docs
-  gem 'yard'
+# Put redcarpet in a group so we can skip installing it in the unit test configuration
+# Needed because it won't install under JRuby
+group :redcarpet do
   # Used for getting good markdown in Yard docs
   gem 'redcarpet'
 end

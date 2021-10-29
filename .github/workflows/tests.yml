@@ -22,7 +22,7 @@ jobs:
           ruby --version
           bundler --version
       - name: Configure Bundler
-        run: bundle config set without "documentation"
+        run: bundle config set without "redcarpet"
       - name: Bundle install
         run: bundle install
       - name: Run tests
