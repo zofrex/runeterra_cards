@@ -18,7 +18,19 @@ jobs:
             ruby: truffleruby-21
           - os: windows-latest
             ruby: truffleruby-head
+          - os: windows-latest
+            ruby: jruby-9.3
+          - os: windows-latest
+            ruby: jruby-head
+        include:
+          - os: windows-latest
+            ruby: jruby-9.3
+            experimental: true
+          - os: windows-latest
+            ruby: jruby-head
+            experimental: true
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     env:
       SKIP_MUTANT_LICENSE: 1
       BUNDLE_WITHOUT: development
