@@ -11,7 +11,6 @@ jobs:
       matrix:
         ruby: ["3.0", "2.7", "2.6", "head", "jruby-9.3", "jruby-head", "truffleruby-20", "truffleruby-21", "truffleruby-head"]
         os: [ubuntu-latest, windows-latest]
-        ignore_failure: [false]
         exclude:
           - os: windows-latest
             ruby: truffleruby-20
@@ -31,7 +30,7 @@ jobs:
             ruby: jruby-head
             ignore_failure: true
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.ignore_failure }}
+    continue-on-error: ${{ matrix.ignore_failure || false }}
     env:
       SKIP_MUTANT_LICENSE: 1
       BUNDLE_WITHOUT: development
