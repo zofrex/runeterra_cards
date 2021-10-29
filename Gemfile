@@ -4,21 +4,19 @@ source 'https://rubygems.org'
 
 gemspec
 
-# Seperate out gems we don't need to run unit tests
-# This:
-#  * makes unit tests run faster by skipping installing these gems
-#  * helps avoid issue where 'redcarpet' fails to install under JRuby
 group :development do
   source 'https://oss:lT1n7OO5v1PIhFu3tv5QCbgDhA9Awe90@gem.mutant.dev' do
     # Required to license the `mutant` gem
     gem 'mutant-license'
   end
+end
 
-  gem 'deep-cover'
-  gem 'mutant'
-  gem 'mutant-minitest'
-  gem 'redcarpet'
-  gem 'rubocop'
-  gem 'rubocop-minitest'
-  gem 'rubocop-performance'
+# Add just the gems needed to run unit tests to their own group, so we can install just these for running tests
+# and skip the other dependencies. This saves time in the unit test job, and solves a problem where 'redcarpet'
+# won't install under JRuby.
+group :test do
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'rake'
+  gem 'yard'
 end
