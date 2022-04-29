@@ -55,10 +55,10 @@ module RuneterraCards
     # The number of shards needed. I.e. the equivalent amount of shards for all these wildcards.
     # @return [Fixnum] shards
     def shards
-      common * 100 +
-        rare * 300 +
-        epic * 1200 +
-        champion * 3000
+      (common * 100) +
+        (rare * 300) +
+        (epic * 1200) +
+        (champion * 3000)
     end
 
     # Whether this Cost is equal to another. Equality means exactly the same number of each wildcard, not just the

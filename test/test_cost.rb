@@ -73,7 +73,7 @@ describe RuneterraCards::Cost do
     end
 
     it 'can add up multiple cards' do
-      _(RuneterraCards::Cost.new(13, 8, 5, 3).shards).must_equal(13 * 100 + 8 * 300 + 5 * 1200 + 3 * 3000)
+      _(RuneterraCards::Cost.new(13, 8, 5, 3).shards).must_equal((13 * 100) + (8 * 300) + (5 * 1200) + (3 * 3000))
     end
   end
 

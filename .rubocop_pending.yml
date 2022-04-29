@@ -200,3 +200,24 @@ Performance/RedundantEqualityComparisonBlock:
 
 Performance/RedundantSplitRegexpArgument:
   Enabled: true
+
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: true
+
+Lint/IncompatibleIoSelectWithFiberScheduler:
+  Enabled: true
+
+Lint/RequireRelativeSelfPath:
+  Enabled: true
+
+Security/IoMethods:
+  Enabled: true
+
+Style/NumberedParameters:
+  Enabled: true
+
+Style/NumberedParametersLimit:
+  Enabled: true
+
+Style/SelectByRegexp:
+  Enabled: true
