@@ -6,7 +6,7 @@ describe RuneterraCards::CardSet do
   describe 'smoke tests from upstream' do
     tests =
       File.open(File.join(__dir__, 'data', 'upstream-tests', 'DeckCodesTestData.txt')) do |test_data_file|
-        test_data_file.each_line(chomp: true).chunk_while {|_, j| !j.empty?}.map { |test| test.reject(&:empty?)}
+        test_data_file.each_line.map(&:strip).chunk_while {|_, j| !j.empty?}.map { |test| test.reject(&:empty?)}
       end
 
     raise if tests.empty?
