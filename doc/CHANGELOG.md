@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2022-04-30
+### Added
+
+- Documented which versions of Ruby are officially supported:
+  - Ruby: 2.6, 2.7, 3.0, 3.1
+  - JRuby: 9.3
+  - TruffleRuby: 20, 21, 22
+
+### Fixed
+
+- Various scenarios where invalid deck codes would produce unhelpful exceptions now raise a `DeckCodeParseError` instead.
+
 ## [0.6.0] - 2021-08-25
 ### Added
 - Support for the Bandle City faction.
