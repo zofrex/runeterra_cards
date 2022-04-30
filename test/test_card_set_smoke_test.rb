@@ -4,13 +4,18 @@ require_relative 'test_helper'
 
 describe RuneterraCards::CardSet do
   describe 'smoke tests from upstream' do
-    test_data_file = File.read(File.join(__dir__, 'data', 'upstream-tests', 'DeckCodesTestData.txt'))
-    tests = test_data_file.split("\n").chunk_while {|_, j| !j.empty?}.map { |test| test.reject(&:empty?)}
+    tests =
+      File.open(File.join(__dir__, 'data', 'upstream-tests', 'DeckCodesTestData.txt')) do |test_data_file|
+        test_data_file.each_line(chomp: true).chunk_while {|_, j| !j.empty?}.map { |test| test.reject(&:empty?)}
+      end
+
+    raise if tests.empty?
 
     tests.each do |test_data|
       deck_code = test_data.shift
+      raise if deck_code.strip.empty?
 
-      it "test deck code #{deck_code}" do
+      it "test deck code #{deck_code.inspect}" do
         # require 'pry'; binding.pry
         deck = RuneterraCards::CardSet.from_deck_code(deck_code)
 
