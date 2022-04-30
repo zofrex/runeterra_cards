@@ -221,3 +221,36 @@ Style/NumberedParametersLimit:
 
 Style/SelectByRegexp:
   Enabled: true
+
+Gemspec/RequireMFA:
+  Enabled: true
+
+Lint/UselessRuby2Keywords:
+  Enabled: true
+
+Naming/BlockForwarding:
+  Enabled: true
+
+Style/FileRead:
+  Enabled: true
+
+Style/FileWrite:
+  Enabled: true
+
+Style/MapToHash:
+  Enabled: true
+
+Style/OpenStructUse:
+  Enabled: true
+
+Performance/ConcurrentMonotonicTime:
+  Enabled: true
+
+Performance/StringIdentifierArgument:
+  Enabled: true
+
+Minitest/AssertWithExpectedArgument:
+  Enabled: true
+
+Minitest/UnreachableAssertion:
+  Enabled: true
