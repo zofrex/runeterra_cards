@@ -66,10 +66,10 @@ module RuneterraCards
     # @param [Cost] other an object that response to {#common}, {#rare}, {#epic}, and {#champion}.
     # @return [Boolean] equal?
     def ==(other)
-      common.equal?(other.common) &&
-        rare.equal?(other.rare) &&
-        epic.equal?(other.epic) &&
-        champion.equal?(other.champion)
+      common.eql?(other.common) &&
+        rare.eql?(other.rare) &&
+        epic.eql?(other.epic) &&
+        champion.eql?(other.champion)
     end
 
     # Subtracts another Cost from this one. Subtraction is performed by subtracting each wildcard type individually,

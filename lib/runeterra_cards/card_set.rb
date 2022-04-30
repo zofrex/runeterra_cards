@@ -29,7 +29,7 @@ module RuneterraCards
       remaining_cards =
         cards.each_with_object({}) do |(code, count), result|
           new_count = count - other.count_for_card_code(code)
-          result[code] = new_count unless new_count.equal?(0)
+          result[code] = new_count unless new_count.eql?(0)
         end
 
       CardSet.new(remaining_cards)
@@ -68,7 +68,7 @@ module RuneterraCards
 
       raise UnrecognizedVersionError.new(SUPPORTED_VERSION, version) unless version <= SUPPORTED_VERSION
 
-      raise unless format.equal? 1
+      raise unless format.eql? 1
 
       int_array = unpack_big_endian_varint(binary_data[1..])
       cards = assemble_card_list(int_array)
