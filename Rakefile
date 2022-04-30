@@ -35,11 +35,6 @@ task :add_pending_cops do
   puts "Added #{pending.length} cops to .rubocop_pending.yml"
 end
 
-desc 'Fast and approximate code coverage checking (branch-level coverage checking)'
-task :coverage do
-  sh 'bundle exec deep-cover clone rake test'
-end
-
 desc 'Thorough code coverage checking via mutation testing (semantic coverage checking)'
 task :mutation_test do
   sh "LOAD_MUTANT=1 bundle exec mutant run --include lib --require 'runeterra_cards' --use minitest" \
@@ -105,8 +100,8 @@ YARD::Rake::YardocTask.new(:verify_docs) do |t|
   t.options = %w[--fail-on-warning --no-output --no-save]
 end
 
-desc 'Run all checks (tests, full coverage, style checks)'
-task all_checks: %i[test coverage mutation_test rubocop verify_docs]
+desc 'Run all checks (tests, coverage, style checks)'
+task all_checks: %i[test mutation_test rubocop verify_docs]
 
 desc 'Run all fast checks (useful for development)'
 task quick_check: %i[test mutation_test_incremental rubocop]

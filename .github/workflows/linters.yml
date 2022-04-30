@@ -5,7 +5,7 @@ on:
   pull_request:
 jobs:
   coverage:
-    name: Coverage & mutation testing
+    name: Coverage/mutation testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,8 +17,6 @@ jobs:
         run: |
           ruby --version
           bundler --version
-      - name: Coverage check
-        run: bundle exec rake coverage
       - name: Mutation testing
         run: bundle exec rake mutation_test
   linters:
