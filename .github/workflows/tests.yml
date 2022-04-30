@@ -25,10 +25,8 @@ jobs:
         include:
           - os: windows-latest
             ruby: jruby-9.3
-            ignore_failure: true
           - os: windows-latest
             ruby: jruby-head
-            ignore_failure: true
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.ignore_failure || false }}
     env:
