@@ -18,6 +18,14 @@ Or, if you're building a Gem, your `.gemspec`:
   spec.add_dependency 'runeterra_cards', '~> 0.6.0'
 ```
 
+### Ruby version support
+
+* Ruby: 2.6, 2.7, 3.0, 3.1
+* JRuby: 9.3 only
+* TruffleRuby: 20, 21, 22
+
+Note that only Linux and Windows are included in automated testing, although other platforms are expected to work. Also note that truffleruby compatibility is not tested on Windows.
+
 ## Updates & Versioning
 
 This library will conform to [semantic versioning](https://semver.org/) once it hits 1.0. In the meantime, you can rely on the minor version (Y in x.Y.z) being bumped for backwards-incompatible changes.
