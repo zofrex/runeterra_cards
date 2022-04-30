@@ -105,11 +105,11 @@ module RuneterraCards
     # @return [Array<Card>]
     def self.assemble_card_list(array)
       3.downto(1).flat_map do |number_of_copies|
-        set_faction_combination_count = array.shift
+        set_faction_combination_count = shift_and_check(array)
         set_faction_combination_count.times.flat_map do
-          number_of_cards, set, faction = array.shift(3)
+          number_of_cards, set, faction = shift_and_check(array, 3)
 
-          array.shift(number_of_cards).map do |card_number|
+          shift_and_check(array, number_of_cards).map do |card_number|
             cac = Card.new(set: set, faction_number: faction, card_number: card_number)
             [cac.code, number_of_copies]
           end
@@ -118,6 +118,26 @@ module RuneterraCards
     end
 
     private_class_method :assemble_card_list
+
+    # Like Array#shift but checks that the number of items requested was
+    #   actually retrieved, errors otherwise.
+    # @param [Array<T>] array Array to shift one or more values from
+    # @param [Integer] count Number of items to shift from the array (default 1)
+    # @return [Array<T>,T]
+    # @raise [DeckCodeParseError]
+    def self.shift_and_check(array, count=nil)
+      if count
+        raise DeckCodeParseError if array.length < count
+
+        array.shift(count)
+      else
+        raise DeckCodeParseError if array.empty?
+
+        array.shift
+      end
+    end
+
+    private_class_method :shift_and_check
 
     # @param [String] binary
     # @return [Enumerable<Fixnum>]

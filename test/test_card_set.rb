@@ -8,6 +8,13 @@ require_relative 'test_helper'
 describe RuneterraCards::CardSet do
   cover 'RuneterraCards::CardSet'
 
+  def deck_code(card_array)
+    format_and_version = (1 << 4) | (1 & 0xF) # format 1, version 1
+    cards = card_array.pack('C*')
+    bytes = [format_and_version].pack('C') + cards
+    Base32.encode(bytes)
+  end
+
   describe 'creation and contents' do
     it 'can be empty' do
       card_set = RuneterraCards::CardSet.new({})
@@ -84,6 +91,10 @@ describe RuneterraCards::CardSet do
   describe '#from_deck_code' do
     let(:empty_deck) do
       [0, 0, 0].pack('C*').freeze
+      # ^  ^  ^
+      # │  │  └ how many set/faction lists for 1x cards
+      # │  └ how many set/faction lists for 2x cards
+      # └ how many set/faction lists for 3x cards
     end
 
     describe 'when given invalid data' do
@@ -148,6 +159,52 @@ describe RuneterraCards::CardSet do
           code = Base32.encode(bytes)
           _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise StandardError
           # TODO: change this to a more specific error
+        end
+      end
+
+      describe 'broken encoding' do
+        describe 'not enough cards in a set/faction list' do
+          it 'returns a DeckCodeParseError' do
+            cards = [0, 0, 1, 1, 1, 3] # , 17]
+            #        ^  ^  ^  ^  ^  ^      ^
+            #        │  │  │  │  │  │      └ card # - MISSING
+            #        │  │  │  │  │  └ faction
+            #        │  │  │  │  └ set
+            #        │  │  │  └ how many cards in this set/faction combo (1)
+            #        │  │  └ how many set/faction lists for 1x cards
+            #        │  └ how many set/faction lists for 2x cards
+            #        └ how many set/faction lists for 3x cards
+            code = deck_code(cards)
+            _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::DeckCodeParseError
+          end
+        end
+
+        describe 'missing set/faction list' do
+          it 'returns a DeckCodeParseError' do
+            cards = [0, 0, 1] # , 1, 1, 3, 17]
+            #        ^  ^  ^      ^  ^  ^  ^
+            #        │  │  │      │  │  │  └ card # - MISSING
+            #        │  │  │      │  │  └ faction - MISSING
+            #        │  │  │      │  └ set - MISSING
+            #        │  │  │      └ how many cards in this set/faction combo - MISSING
+            #        │  │  └ how many set/faction lists for 1x cards
+            #        │  └ how many set/faction lists for 2x cards
+            #        └ how many set/faction lists for 3x cards
+            code = deck_code(cards)
+            _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::DeckCodeParseError
+          end
+        end
+
+        describe 'missing one of the Nx cards counts' do
+          it 'returns a DeckCodeParseError' do
+            cards = [0, 0] # , 0]
+            #        ^  ^      ^
+            #        │  │      └ how many set/faction lists for 1x cards - MISSING
+            #        │  └ how many set/faction lists for 2x cards
+            #        └ how many set/faction lists for 3x cards
+            code = deck_code(cards)
+            _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise RuneterraCards::DeckCodeParseError
+          end
         end
       end
     end
