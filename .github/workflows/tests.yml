@@ -17,16 +17,9 @@ jobs:
           - os: windows-latest
             ruby: truffleruby-21
           - os: windows-latest
+            ruby: truffleruby-22
+          - os: windows-latest
             ruby: truffleruby-head
-          - os: windows-latest
-            ruby: jruby-9.3
-          - os: windows-latest
-            ruby: jruby-head
-        include:
-          - os: windows-latest
-            ruby: jruby-9.3
-          - os: windows-latest
-            ruby: jruby-head
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.ignore_failure || false }}
     env:
