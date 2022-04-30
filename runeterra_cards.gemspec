@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => 'https://www.rubydoc.info/gems/runeterra_cards/file/doc/CHANGELOG.md',
     'source_code_uri' => 'https://github.com/zofrex/runeterra_cards',
     'documentation_uri' => 'https://www.rubydoc.info/gems/runeterra_cards/',
+    'rubygems_mfa_required' => 'true',
   }
 
   s.executables   = []
