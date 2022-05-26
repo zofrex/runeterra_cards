@@ -143,7 +143,7 @@ describe RuneterraCards::CardSet do
 
         it 'includes the expected version in the error message' do
           err = _{RuneterraCards::CardSet.from_deck_code(@code)}.must_raise RuneterraCards::UnrecognizedVersionError
-          _(err.message).must_match(/was expecting: 4/)
+          _(err.message).must_match(/was expecting: 5/)
         end
 
         it 'includes the version we got in the error object' do
@@ -210,7 +210,7 @@ describe RuneterraCards::CardSet do
     end
 
     describe 'valid versions' do
-      [1, 2, 3, 4].each do |version|
+      [1, 2, 3, 4, 5].each do |version|
         it "accepts version #{version}" do
           format_and_version = (1 << 4) | (version & 0xF) # format 1, version x
           bytes = [format_and_version].pack('C') + empty_deck
@@ -219,8 +219,10 @@ describe RuneterraCards::CardSet do
         end
       end
 
-      it "doesn't accept version 5" do
-        format_and_version = (1 << 5) | (4 & 0xF) # format 1, version 5
+      it "doesn't accept version 6" do
+        format = 1
+        version = 6
+        format_and_version = (format << 4) | (version & 0xF) # format 1, version 5
         bytes = [format_and_version].pack('C') + empty_deck
         code = Base32.encode(bytes)
         _{RuneterraCards::CardSet.from_deck_code(code)}.must_raise

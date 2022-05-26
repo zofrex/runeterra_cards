@@ -14,6 +14,7 @@ FACTION_TABLE = <<-TABLE
   2	9	MT	Mount Targon
   3	7	SH	Shurima
   4	10	BC	Bandle City
+  5	12	RU	Runeterra
 TABLE
 
 FACTIONS = FACTION_TABLE.split("\n").map(&:split).map{|line| [Integer(line[1], 10), line[2], line[3]]}.freeze

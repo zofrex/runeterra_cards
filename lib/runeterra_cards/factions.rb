@@ -16,6 +16,7 @@ module RuneterraCards
     7 => 'SH',
     9 => 'MT',
     10 => 'BC',
+    12 => 'RU',
   }.freeze
   public_constant :FACTION_IDENTIFIERS_FROM_INT
 
@@ -34,6 +35,7 @@ module RuneterraCards
     'SH' => 7,
     'MT' => 9,
     'BC' => 10,
+    'RU' => 12,
   }.freeze
   public_constant :FACTION_INTS_FROM_IDENTIFIER
 end
