@@ -9,13 +9,13 @@ This library makes it easy to decode Legends of Runeterra deck codes, load Data 
 Add the following to your `Gemfile`:
 
 ```
-gem 'runeterra_cards', '~> 0.6.1'
+gem 'runeterra_cards', '~> 0.7.0'
 ```
 
 Or, if you're building a Gem, your `.gemspec`:
 
 ```
-  spec.add_dependency 'runeterra_cards', '~> 0.6.1'
+  spec.add_dependency 'runeterra_cards', '~> 0.7.0'
 ```
 
 ### Ruby version support

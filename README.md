@@ -15,13 +15,13 @@ Deck code decoding is based on [the specification documented by Riot Games](http
 Add the following to your `Gemfile`:
 
 ```
-gem 'runeterra_cards', '~> 0.6.1'
+gem 'runeterra_cards', '~> 0.7.0'
 ```
 
 Or, if you're building a Gem, your `.gemspec`:
 
 ```
-  spec.add_dependency 'runeterra_cards', '~> 0.6.1'
+  spec.add_dependency 'runeterra_cards', '~> 0.7.0'
 ```
 
 ## Development & Contributing
